@@ -14,9 +14,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" >
+    <html lang="fa" dir="rtl">
       <body
-        style={{ backgroundImage: "radial-gradient(circle 815px at 23.4% -21.8%, rgba(9,29,85,1) 0.2%, rgba(0,0,0,1) 100.2%)" }}
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
         <NextUIProvider>
           <CustomNavbar />

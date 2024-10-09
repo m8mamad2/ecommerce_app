@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "../globals.css";
+import "@/globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { geistMono, geistSans } from "../utils/fonts";
 import CustomNavbar from "../components/Navbar";
+import { vazirmatnFont } from "../fonts/font";
 
 
 
@@ -14,10 +15,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fa" dir="rtl">
+    <html className="dark" lang="fa" dir="rtl">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
-        <NextUIProvider>
+        className={`${geistSans.variable} ${geistMono.variable} ${vazirmatnFont.className} antialiased dark`}>
+         <NextUIProvider>
           <CustomNavbar />
           { children }
         </NextUIProvider>

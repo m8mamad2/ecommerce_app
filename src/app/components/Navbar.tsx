@@ -11,8 +11,8 @@ export default async function CustomNavbar() {
   ]
   
   return (
-    <div className="flex justify-center w-full bg-red-600">
-      <Navbar className="bg-foreground  py-1 absolute w-[90%] right-24 top-8 z-50 rounded-full ">
+    <div className="flex justify-center w-full ">
+      <Navbar className="bg-background py-1 absolute w-[90%] right-24 top-8 z-50 rounded-full ">
         <NavbarBrand>
           <p className="font-bold text-2xl text-white text-inherit">Gallmond</p>
         </NavbarBrand>

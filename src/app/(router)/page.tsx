@@ -40,7 +40,7 @@ export default function Home() {
               <h1 className="text-gray-600 text-sm mt-7">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز</h1>
               <div className="flex flex-row gap-3 mt-24">
                 <button className="px-9 py-4 rounded-full bg-black text-white">همین الان خرید کن</button>
-                <div className="flex w-14 pr-1 justify-center items-center bg-white rounded-full">
+                <div className="flex w-14 pr-1 justify-center items-center bg-white rounded-full cursor-pointer">
                   <CiLocationArrow1 size={25}/>
                 </div> 
               </div>
@@ -203,8 +203,6 @@ export default function Home() {
             </div> 
           </div>
       </div>
-
-      
 
       <footer className="relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-black bg-[url('/grid.png')]">
           <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">

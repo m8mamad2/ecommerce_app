@@ -11,30 +11,26 @@ export default async function CustomNavbar() {
   
   return (
     <div className="flex justify-center w-full ">
-      <Navbar className="flex flex-row bg-background py-1 absolute w-[90%] right-24 top-8 z-50 rounded-full">
+      <div className="grid grid-cols-3 bg-background py-5 absolute w-[90%] right-24 top-8 z-50 rounded-full px-20">
 
-        <NavbarContent justify="start">
-          <p className="font-bold text-2xl text-white text-inherit">Gallmond</p>
-        </NavbarContent>
+        <p className="font-bold mt-1 text-3xl text-white text-inherit ">Gallmond</p>
 
-        <NavbarContent className="hidden mx-36 sm:flex gap-4 text-white" justify="center">
+        <div className="hidden sm:flex-row justify-center sm:flex gap-7 text-white" >
           {navbarItems.map((e, index)=> (
-            <NavbarItem key={index}>
-              <Link href={e.url} className="text-gray-300 text-sm ">
+            <button key={index}>
+              <Link href={e.url} className="text-gray-300 text-xl hover:text-primary ">
                 {e.title}
               </Link>
-            </NavbarItem>
+            </button>
           ))}
-        </NavbarContent>
+        </div>
 
-        <NavbarContent justify="end">
-          <NavbarItem className="text-gray-300 text-sm ">
-            <Button>ثبت نام</Button>
-            <Button>وارد شدن</Button>
-          </NavbarItem>
-        </NavbarContent>
+        <div className="text-gray-300 gap-3 text-sm flex flex-row justify-end ">
+          <Button className="px-8">ثبت نام</Button>
+          <Button className="px-8">وارد شدن</Button>
+        </div>
 
-      </Navbar>
+      </div>
     </div>
   );
 }

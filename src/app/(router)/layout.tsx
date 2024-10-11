@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html className="dark" lang="fa" dir="rtl">
+    <html  lang="fa" dir="rtl">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${vazirmatnFont.className} antialiased dark`}>
          <NextUIProvider>

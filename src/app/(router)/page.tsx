@@ -19,10 +19,16 @@ import FashionImaget2 from '@/app/assets/landing/image5.png'
 import FashionImaget3 from '@/app/assets/landing/image6.png'
 import FashionImaget4 from '@/app/assets/landing/image7.png'
 
+import MostSellImage from '@/app/assets/landing/mostSell.png'
+import MostSellImage2 from '@/app/assets/landing/mostSell2.png'
+import MostSellImage3 from '@/app/assets/landing/mostSell3.png'
+import AfterMostSellBackgroundImage from '@/app/assets/landing/bglast.png'
+
+
 export default function Home() {
 
   const images = [FashionImaget1,FashionImaget2,FashionImaget3]
-  const hotProducts = [1,1,1,1]
+  const hotProducts = [MostSellImage, MostSellImage2 ,MostSellImage3 ,MostSellImage]
   const customeresGrid = [1,1,1,1,1,1]
   
   return (
@@ -115,7 +121,7 @@ export default function Home() {
       
       <div className={`relative flex flex-col px-32 mt-8 rounded-lg bg-[#D9D0FF] bg-[url('/grid.png')]`}>
         
-        <div className="flex flex-row mt-10">
+        <div className="flex flex-row gap-5  w-full justify-end mt-10">
           <Image src={TwiteerIcon} alt="TwiteerIcon"/>
           <Image src={instagramIcon} alt="instagramIcon"/>
           <Image src={facebookIcon} alt="facebookIcon"/>
@@ -124,13 +130,14 @@ export default function Home() {
 
         <div className="grid grid-cols-2">
           <div>
-            <h1 className="text-5xl font-semibold mt-6">Lorem</h1>
-            <h1 className="text-5xl font-semibold mt-6">INSPUTM</h1>
-            <h1 className="text-5xl font-semibold mt-6">WORLDICELOKN</h1>
+            <h1 className="text-6xl font-semibold mt-8">همکاری با بهترین ها</h1>
+            <h1 className="text-6xl font-semibold mt-8">قیمت ارزان</h1>
+            <h1 className="text-6xl font-semibold mt-8">تولید های اختصاصی</h1>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-gray-500 text-sm font-light">{"Lorem ipsum dolor sit amet consectetur adipisicing elit., quibusdam voluptates! Nulla, tenetur cum accusantium ab exercitationem aliquam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate beatae quae provident aut earum corporis itaque obcaecati magni totam perspiciatis iure, quibusdam voluptates! Nulla, tenetur cum accusantium ab exercitationem aliquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate beatae quae provident aut earum corporis itaque obcaecati magni totam perspiciatis iure, quibusdam voluptates! Nulla, tenetur cum accusantium ab exercitationem aliquam? \n\t Lorem ipsum dolor sit amet consectetur adipisicing elit. V "}</h1>
-            <h1 className="text-gray-500 text-sm font-light mt-6">{"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate beatae quae provident aut earum corporis itaque obcaecati magni totam perspiciatis iure, quibusdam voluptates! Nulla, tenetur cum accusantium ab exercitationem aliquam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate beatae quae provident aut earum corporis itaque obcaecati magni totam perspiciatis iure, quibusdam voluptates! Nulla, tenetur cum accusantium ab exercitationem aliquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate beatae quae provident aut earum corporis itaque obcaecati magni totam perspiciatis iure, quibusdam voluptates! Nulla, tenetur cum accusantium ab exercitationem aliquam? \n\t Lorem ipsum dolor sit amet consectetur adipisicing elit. V "}</h1>
+            <h1 className="text-gray-500 text-sm font-light mt-8">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشدد</h1>
+            <h1 className="text-gray-500 text-sm font-light mt-6">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشدد.
+            </h1>
           </div>
         </div>
 
@@ -155,19 +162,18 @@ export default function Home() {
 
       </div>
 
-      <div className={`relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-[#D9D0FF] bg-[url('/grid.png')]`}>
-          <h1 className="text-5xl font-semibold">OUR HOT SELLING PRODUCTS</h1>
-          <p className="text-gray-500 text-sm my-6">Discover a fusion trend and sophisitcation in our create colelction .From chic essentail  to essinitoaij to state picecs, out fashion ebraces invididautaly. ensurini g woekjrlej sdfwemo sdorjoienit </p>
+      <div className={`relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-[#EFEFEF] bg-[url('/grid.png')] `}>
+          <h1 className="text-6xl font-semibold">پرفروش ترین محصول های ما</h1>
+          <p className="text-gray-500 text-sm my-6">تلفیقی از روند و پیچیدگی را در مجموعه سرپرستی ما کشف کنید. از لوازم ضروری شیک گرفته تا تکه‌های معمولی، مد ما فردیت را در بر می‌گیرد و تضمین می‌کند که هر کمد لباسی منعکس‌کننده سبک، تطبیق پذیری و ظرافت جاودانه است.</p>
           <div className="grid grid-cols-4 gap-4 w-full ">
                 {hotProducts.map((e,index)=> 
-                  <div  className="bg-orange-400" key={index} >
+                  <div key={index} >
                     <div className="rounded-lg bg-white flex justify-center h-96 items-center ">
-                      {/* <Image /> */}
-                      sdklfjsd 
+                      <Image src={e} alt="ss"/>
                     </div>
-                    <div className="flex flex-row justify-between items-center">
-                      <h1>White HOdie</h1>
-                      <h1>50$</h1>
+                    <div className="flex flex-row justify-between items-center px-4 mt-3">
+                      <h1 className="text-2xl font-extrabold">هودی تک</h1>
+                      <h1 className="text-2xl font-extrabold">۵۰$</h1>
                     </div>
                   </div>
                 )}
@@ -175,36 +181,37 @@ export default function Home() {
       </div>
 
 
-      <div className={`relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-[#D9D0FF] bg-[url('/grid.png')]`}>
-         <h1 className="text-5xl font-semibold">WHAT OUT CLIENT SAYS</h1>
-         <div className="grid grid-cols-3 gap-8">
+      <div className={`relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-[#BBF6BE] bg-[url('/grid.png')] `}>
+         <h1 className="text-5xl font-semibold">مشتری ها درباره ما چی میگن</h1>
+         <p className="text-gray-500 text-sm my-6">تلفیقی از روند و پیچیدگی را در مجموعه سرپرستی ما کشف کنید. از لوازم ضروری شیک گرفته تا تکه‌های معمولی، مد ما فردیت را در بر می‌گیرد و تضمین می‌کند که هر کمد لباسی منعکس‌کننده سبک، تطبیق پذیری و ظرافت جاودانه است.</p>
+         <div className="grid grid-cols-3 gap-12">
                 {
                   customeresGrid.map((e,index)=> 
-                    <div key={index} className="rounded-lg bg-white ">
+                    <div key={index} className="rounded-xl bg-white shadow-lg flex flex-col items-center justify-center py-5 px-8">
                       <Image 
-                        className="rounded-full w-32 h-32"
+                        className="rounded-full w-16 h-16"
                         src={manLandingImage}
                         alt="image" />
                       <p className="text-gray-500 text-sm my-6">Discover a fusion trend and sophisitcation in our create colelction .From chic essentail  to essinitoaij to state picecs, out fashion ebraces invididautaly. ensurini g woekjrlej sdfwemo sdorjoienit </p>
-                      <h1 className="text-xl font-semibold">ALI MAMALY</h1>
+                      <h1 className="text-xl font-medium">ALI MAMALY</h1>
                     </div> 
                   )
                 }
          </div>
       </div>
 
-      <div className={`relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-[#D9D0FF] bg-[url('/grid.png')]`}>
-          <h1 className="text-5xl font-semibold">OUR HOT SELLING PRODUCTS</h1>
-          <p className="text-gray-500 text-sm my-6">Discover a fusion trend and sophisitcation in our create colelction .From chic essentail  to essinitoaij to state picecs, out fashion ebraces invididautaly. ensurini g woekjrlej sdfwemo sdorjoienit </p>
-          <div className="flex flex-row gap-3 mt-24">
-            <button className="px-9 py-4 rounded-full bg-black text-white">همین الان خرید کن</button>
+      <div className={`relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-[#D9D0FF] bg-[url('/bglast.png')]`}>
+          <h1 className="text-5xl font-semibold text-white mt-8">مشتری ها درباره ما چی میگن</h1>
+          <p className="text-sm my-6 text-gray-300">امروز بازی مد خود را ارتقا دهید! مجموعه انتخاب شده ما را کاوش کنید و با سبکی جاودانه اظهار نظر کنید. خارق‌العاده را در آغوش بگیرید – اکنون برای کمد لباسی بخرید که به خوبی سخن می‌گوید</p>
+          <div className="flex flex-row gap-3 my-24 ">
+            <button className="px-9 py-4 rounded-full bg-[#BBF6BE] text-black">همین الان خرید کن</button>
             <div className="flex w-14 pr-1 justify-center items-center bg-white rounded-full">
               <CiLocationArrow1 size={25}/>
             </div> 
           </div>
       </div>
 
-      <footer className="relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-black bg-[url('/grid.png')]">
+      <footer className="relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-black">
           <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
               <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0">

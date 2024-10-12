@@ -5,6 +5,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { geistMono, geistSans } from "../utils/fonts";
 import CustomNavbar from "../components/Navbar";
 import { vazirmatnFont } from "../fonts/font";
+import Footer from "../components/Footer";
 
 
 
@@ -18,9 +19,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html  lang="fa" dir="rtl">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${vazirmatnFont.className} antialiased dark`}>
-          <NextUIProvider>
+        <NextUIProvider>
           <CustomNavbar />
           { children }
+          <Footer />
         </NextUIProvider>
       </body>
     </html> 

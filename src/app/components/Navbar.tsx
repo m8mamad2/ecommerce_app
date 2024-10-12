@@ -20,7 +20,7 @@ export default async function CustomNavbar() {
         <div className="hidden sm:flex-row justify-center sm:flex gap-7 text-white" >
           {navbarItems.map((e, index)=> (
             <button key={index}>
-              <Link href={e.url} className="text-gray-300 text-xl hover:text-primary ">
+              <Link href={e.url} className="text-white font-semibold text-xl hover:text-primary ">
                 {e.title}
               </Link>
             </button>
@@ -28,8 +28,12 @@ export default async function CustomNavbar() {
         </div>
 
         <div className="text-gray-300 gap-3 text-sm flex flex-row justify-end ">
-          <Button className="px-8">ثبت نام</Button>
-          <Button className="px-8">وارد شدن</Button>
+          <Link href="/login">
+            <Button className="px-8">ورود</Button>
+          </Link> 
+          <Link href="/register">
+            <Button className="px-8">ثبت نام</Button>
+          </Link> 
         </div>
 
       </div>

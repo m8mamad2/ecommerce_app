@@ -14,11 +14,11 @@ import Payment from "./Payment";
 
 export default function CartCheckout(){
     
-    const [step, setStep] = useState< 0 | 1 | 2 >(0);
+    const [step, setStep] = useState< 1 | 2 | 3 >(1);
     const cartCheckoutItems: { step: number, title: string, icon: ReactNode, page: ReactNode }[] = [
         { step:0, title: "جزیات خرید ", icon: <MdPayment/> , page: <Payment setStep={setStep}/> }, 
-        { step:1, title: "جزیات آدرس ", icon: <GoLocation/> , page: <Address />}, 
-        { step:2, title: "پرداخت", icon: <BsCartDash/> , page: <FinalPayment />}, 
+        { step:1, title: "جزیات آدرس ", icon: <GoLocation/> , page: <Address setStep={setStep}/>}, 
+        { step:2, title: "پرداخت", icon: <BsCartDash/> , page: <FinalPayment setStep={setStep}/>}, 
     ]
     
     const [progress, setProgress] = useState<number>(20);
@@ -28,7 +28,7 @@ export default function CartCheckout(){
     return ( 
         <div className="w-[35%] sticky top-10 z-10 h-full">
             <div>
-                <Progress value={progress} className="rotate-180" classNames={{ indicator:'bg-background', base:'bg-white' }} />
+                <Progress value={(step * 50)} className="rotate-180" classNames={{ indicator:'bg-background', base:'bg-white' }} />
                 <ol className="mt-2 flex flex-row justify-between px-5 text-sm font-medium text-gray-500">
                     {
                         cartCheckoutItems.map((e,index)=> 

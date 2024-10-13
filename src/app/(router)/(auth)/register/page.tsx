@@ -58,7 +58,7 @@ export default function RegisterPage(){
                     placeholder="Enter your password"
                     type={isVisible ? "text" : "password"}
                     endContent={
-                        <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
+                        <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-labelledby="toggle password visibility" aria-label="toggle password visibility">
                         {isVisibleRepeat ? (
                             <RiEyeLine className="text-2xl text-default-400 pointer-events-none" />
                         ) : (

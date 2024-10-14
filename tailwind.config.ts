@@ -1,4 +1,4 @@
-import {nextui} from '@nextui-org/theme';
+import { nextui } from '@nextui-org/theme';
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -12,6 +12,7 @@ const config: Config = {
     extend: {
       colors: {
         background: "#212121",
+        primary: "#53e8c4"
       },
     },
   },

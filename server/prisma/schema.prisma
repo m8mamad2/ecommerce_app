@@ -1,0 +1,67 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Food {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  images      String[]
+  price       Int
+  Favorite    Favorite?
+}
+
+model Favorite {
+  id           Int    @id @default(autoincrement())
+  userId       String @unique
+  foodId       Int    @unique
+  favoriteFood Food   @relation(fields: [foodId], references: [id])
+}
+
+model User {
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
+  password    String
+  userName    String  @unique
+  name        String?
+  family      String?
+  address_name   String?  
+  address     Float[]
+  phoneNumber String? @unique
+}
+
+model Message {
+  id        Int         @id @default(autoincrement())
+  data      String
+  type      String @default("Message")
+  sender    String
+  receiver  String
+  createdAt DateTime    @default(now())
+}
+
+
+model TableReservation {
+  id            Int     @id @default(autoincrement())
+  table         String
+  chairs_number Int
+  is_reserver   Boolean
+  reserved_date String
+  reserved_hour String
+}
+
+model Order {
+  id          Int       @id @default(autoincrement())
+  userId      Int? 
+  title       String
+  description String
+  images      String[]
+  price       Int
+  isComplete  Boolean @default(false)
+}

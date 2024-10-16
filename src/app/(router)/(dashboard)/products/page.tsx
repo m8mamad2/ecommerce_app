@@ -1,6 +1,8 @@
 import { div } from "framer-motion/client";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { Button, Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
+import { MdFavoriteBorder } from "react-icons/md";
+import ProductCard from "@/app/components/ProductCard";
 
 export default function ProductsPage(){
 
@@ -27,21 +29,7 @@ export default function ProductsPage(){
                     <Button variant="ghost" className="rounded-lg hover:text-white border-1 text-black text-sm py-1 px-5">دیدن همه</Button>
                 </div>
                 <div className="gap-6 grid grid-cols-2 sm:grid-cols-4">
-                    {data.map((item, index) => (
-                        <div key={index} className="rounded-xl bg-white p-2">
-                            <div
-                                className={`border-none h-36 relative rounded-lg`}
-                                style={{ backgroundImage: `url(${item})`, backgroundSize: 'cover', backgroundPosition: 'center' }} >
-                                <button className="bg-white rounded-2xl absolute right-2 bottom-3 text-sm shadow-lg py-1 w-20 text-black ">پرفروش</button>
-                            </div>
-                            <div className="flex flex-row justify-between my-2 px-1">
-                                <h1 className="text-base">LILI</h1>
-                                <h1 className="text-base">50$</h1>
-                            </div>
-                            <div>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </div>
-                            <Button className="mt-4 mb-1"> اضافه کردن به سبد</Button>
-                        </div>
-                    ))}
+                    {data.map((item, index) => <ProductCard  item={item} index={index}/>)}
                 </div>
             </div>
             
@@ -63,21 +51,7 @@ export default function ProductsPage(){
                     <Button variant="ghost" className="rounded-lg hover:text-white border-1 text-black text-sm py-1 px-5">دیدن همه</Button>
                 </div>
                 <div className="gap-6 grid grid-cols-2 sm:grid-cols-5">
-                    {dataNew.map((item, index) => (
-                        <div key={index} className="rounded-xl bg-white p-2">
-                            <div
-                                className={`border-none h-36 relative rounded-lg`}
-                                style={{ backgroundImage: `url(${item})`, backgroundSize: 'cover', backgroundPosition: 'center' }} >
-                                <button className="bg-white rounded-2xl absolute right-2 bottom-3 text-sm shadow-lg py-1 w-20 text-black ">پرفروش</button>
-                            </div>
-                            <div className="flex flex-row justify-between my-2 px-1">
-                                <h1 className="text-base">LILI</h1>
-                                <h1 className="text-base">50$</h1>
-                            </div>
-                            <div>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </div>
-                            <Button className="mt-4 mb-1"> اضافه کردن به سبد</Button>
-                        </div>
-                    ))}
+                    {dataNew.map((item, index) => <ProductCard  item={item} index={index}/>)}
                 </div>
             </div>
 
@@ -85,3 +59,4 @@ export default function ProductsPage(){
         </div>
     );
 }
+

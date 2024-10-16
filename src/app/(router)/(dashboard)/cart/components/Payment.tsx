@@ -1,7 +1,7 @@
 import { Button } from "@nextui-org/react"
 import { Dispatch, SetStateAction } from "react"
 
-export default function Payment({ setStep }:{ setStep:Dispatch<SetStateAction<0 | 1 | 2>> }){
+export default function Payment({ setStep }:{ setStep:Dispatch<SetStateAction<1 | 2 | 3>> }){
 
     
     const summaryOrder: {title:string , price: number}[] = [
@@ -16,7 +16,7 @@ export default function Payment({ setStep }:{ setStep:Dispatch<SetStateAction<0 
         <hr className="h-0.5 bg-gray-300 my-4"/>
         <div className="flex flex-col gap-3 mb-4">
             {summaryOrder.map((e,index)=>(
-                <div className="flex flex-row justify-between">
+                <div key={index} className="flex flex-row justify-between">
                     <h1 className="text-gray-500">{e.title}</h1>
                     <h1 className="text-black font-bold">{e.price}</h1>
                 </div>
@@ -28,7 +28,7 @@ export default function Payment({ setStep }:{ setStep:Dispatch<SetStateAction<0 
                 <h1 className="text-black font-medium">مجموع</h1>
                 <h1 className="text-xl text-black font-bold">10000</h1>
             </div>
-            <Button className="w-full">
+            <Button onClick={()=> setStep(1)} className="w-full">
                 پرداخت مبلغ
             </Button>
         </div>

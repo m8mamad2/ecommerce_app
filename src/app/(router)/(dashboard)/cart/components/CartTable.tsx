@@ -2,12 +2,9 @@
 
 import React, { Key, ReactNode } from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue, TableHeaderProps} from "@nextui-org/react";
-import { RiEditCircleFill } from "react-icons/ri";
-import { FiDelete } from "react-icons/fi";
-import { IoAddCircleOutline } from "react-icons/io5";
 import { MdOutlineAddBox } from "react-icons/md";
-import { statusColorMap, TUserTableType } from '@/app/types/cartType'
 import { CiSquareRemove } from "react-icons/ci";
+import { TUserTableType } from '@/app/types/cartType'
 
 
 
@@ -68,7 +65,7 @@ export default function CartTable() {
   }, []);
 
   return (
-  <Table aria-label="Example table with custom cells">
+  <Table aria-labelledby="Example table with custom cells" aria-label="Example table with custom cells">
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
@@ -124,60 +121,18 @@ const users: TUserTableType[] = [
         howMuch:'12'
     },
     {
-        id: 1,
+        id: 5,
         name: "پیراهن گل گلی",
         image: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
         price:'22$',
         howMuch:'0'
     },
     {
-        id: 2,
+        id: 6,
         name: "شلوار گل منگولی",
         image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
         price:'27$',
         howMuch:'0'
-    },
-    {
-        id: 3,
-        name: "شرتک گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-        price:'27$',
-        howMuch:'8'
-    },
-    {
-        id: 4,
-        name: "شرتک گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-        price:'27$',
-        howMuch:'12'
-    },
-    {
-        id: 1,
-        name: "پیراهن گل گلی",
-        image: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-        price:'22$',
-        howMuch:'0'
-    },
-    {
-        id: 2,
-        name: "شلوار گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-        price:'27$',
-        howMuch:'0'
-    },
-    {
-        id: 3,
-        name: "شرتک گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-        price:'27$',
-        howMuch:'8'
-    },
-    {
-        id: 4,
-        name: "شرتک گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-        price:'27$',
-        howMuch:'12'
     },
     
 ];

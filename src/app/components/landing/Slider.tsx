@@ -7,16 +7,16 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import unionIcon from '@/app/assets/UnionIcon.png'
 import Image from 'next/image';
+import { simpleButtonTransitionClass } from '@/app/utils/hover_animation';
 
 const TextSlider = () => {
 
     const texts = [
-        "NASA",
-        "MAINContent",
-        "LREOMS Ispu",
-        "MAXIUSM LIAG",
-        "BROTHER IS M",
-        "OKTHATFIND",
+        "بهترین کیفیت",
+        "تولید داخلی",
+        "استفاده از بهترین اجناس",
+        "جنسو ببین جوون بابا",
+        "چند تا بخیر یکی ببر",
     ]
     
     return (
@@ -40,9 +40,9 @@ const TextSlider = () => {
                             alignItems:'center'
                         }}
                         key={index}
-                        className='text-white text-2xl font-bold'>
+                        className='text-white text-2xl font-bold '>
                             <Image src={unionIcon} alt='icon' className=''/>
-                            <h1>{ e }</h1>
+                            <h1 className={`font-bold hover:text-primary cursor-pointer hover:scale-110 ${simpleButtonTransitionClass}`}>{ e }</h1>
                     </SwiperSlide>
                 )
             }

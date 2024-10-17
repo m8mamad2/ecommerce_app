@@ -1,3 +1,4 @@
+import { simpleButtonTransitionClass } from "@/app/utils/hover_animation";
 import { Button } from "@nextui-org/react"
 import { MdOutlineAddIcCall } from "react-icons/md";
 
@@ -5,11 +6,11 @@ export default function AboutPage(){
     return (
         <div className="mx-10 my-4">
             <div className={`grid grid-cols-2 px-6 pt-40 h-[97vh] rounded-lg bg-[#EBEEED] bg-[url('/grid.png')]`}>
-                <div className="rounded-lg bg-orange-300 bg-[url('/bglast.png')] mb-10 mx-10 border-2 shadow-2xl" />
+                <div className="rounded-lg bg-orange-300 bg-[url('/bglast.png')] mb-10 mx-10 border-2 shadow-2xl transition duration-300 ease-in-out hover:scale-90" />
                 <div className="flex flex-col  mt-10">
                     <h1 className="text-5xl font-bold mb-10">در مورد تیم ما</h1>
                     <h1>{des}</h1>
-                    <Button className="mt-5 w-72 py-5 rounded-md">
+                    <Button className={`mt-5 w-72 py-5 rounded-lg bg-primary text-black ${simpleButtonTransitionClass} hover:scale-110 hover:shadow-xl`}>
                         <MdOutlineAddIcCall />
                         تماس با ما  
                     </Button>

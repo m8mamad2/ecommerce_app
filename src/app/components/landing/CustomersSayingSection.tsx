@@ -1,5 +1,6 @@
 import Image from "next/image";
 import manLandingImage from '@/app/assets/imageLanding.png'
+import { simpleButtonTransitionClass } from "@/app/utils/hover_animation";
 
 export default function CustomersSayingSection(){
 
@@ -12,7 +13,7 @@ export default function CustomersSayingSection(){
         <div className="grid grid-cols-3 gap-12">
                {
                  customeresGrid.map((e,index)=> 
-                   <div key={index} className="rounded-xl bg-white shadow-lg flex flex-col items-center justify-center py-5 px-8">
+                   <div key={index} className={`rounded-xl bg-white shadow-lg flex flex-col items-center justify-center py-5 px-8 ${simpleButtonTransitionClass} hover:scale-110 hover:shadow-xl`}>
                      <Image 
                        className="rounded-full w-16 h-16"
                        src={manLandingImage}

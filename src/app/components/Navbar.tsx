@@ -9,6 +9,7 @@ export default async function CustomNavbar() {
       { title:'درباره ما', url:'/about' },
       { title:'محصولات', url:'/products' },
       { title:'سبد خرید',  url:'/cart' },
+      { title:'علاقه مندی ها',  url:'/favorite' },
   ]
   
   return (

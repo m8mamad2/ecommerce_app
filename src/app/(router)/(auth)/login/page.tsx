@@ -52,7 +52,6 @@ export default function LoginPage(){
             </div>
 
 
-            <div className="absolute top-0 left-0 h-32 w-32 bg-[#656563] rounded-full"></div>
 
         </div>
     )

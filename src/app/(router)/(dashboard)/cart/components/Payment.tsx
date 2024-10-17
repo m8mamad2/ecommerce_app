@@ -28,7 +28,7 @@ export default function Payment({ setStep }:{ setStep:Dispatch<SetStateAction<1 
                 <h1 className="text-black font-medium">مجموع</h1>
                 <h1 className="text-xl text-black font-bold">10000</h1>
             </div>
-            <Button onClick={()=> setStep(1)} className="w-full">
+            <Button onClick={()=> setStep(2)} className="w-full">
                 پرداخت مبلغ
             </Button>
         </div>

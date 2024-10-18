@@ -23,7 +23,7 @@ export default function CollaborationSection(){
     const images = [FashionImaget1,FashionImaget2,FashionImaget3]
 
     return (
-        <div className={`relative flex flex-col px-32 mt-8 rounded-lg bg-[#D9D0FF] bg-[url('/grid.png')]`}>
+        <div className={`relative flex flex-col px-32 mt-8 rounded-lg bg-[#D9D0FF] bg-[url('/grid.png')] `}>
         <div className=" flex flex-row gap-5  w-full justify-end mt-10">
           <CiTwitter className={`text-gray-800 border-2 p-2 w-14 h-14 border-gray-800 rounded-full ${simpleButtonTransitionClass} hover:scale-95 hover:text-primary hover:border-white`} size={40}/>
           <CiInstagram className={`text-gray-800 border-2 p-2 w-14 h-14 border-gray-800 rounded-full ${simpleButtonTransitionClass} hover:scale-95 hover:text-primary hover:border-white`} size={40}/>

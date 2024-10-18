@@ -14,13 +14,13 @@ export default async function CustomNavbar() {
   
   return (
     <div className="flex justify-center w-full ">
-      <div className="grid grid-cols-3 bg-background py-5 absolute w-[90%] right-24 top-8 z-50 rounded-full px-20">
+      <div className="grid grid-cols-4 bg-background py-5 absolute w-[90%] right-24 top-8 z-50 rounded-full px-20">
 
         <Link href="/" className="font-bold mt-1 text-3xl text-white text-inherit ">
           <h1 className="text-white hover:text-primary">Gallmond</h1>
         </Link>
 
-        <div className="hidden sm:flex-row justify-center sm:flex gap-7 text-white" >
+        <div className="hidden col-span-2 sm:flex-row justify-center sm:flex gap-7 text-white " >
           {navbarItems.map((e, index)=> (
             <button key={index}>
               <Link href={e.url} className={`text-white font-semibold text-xl hover:text-primary hover:scale-90 ${simpleButtonTransitionClass}`}>

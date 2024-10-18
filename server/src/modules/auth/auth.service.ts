@@ -1,5 +1,5 @@
 import { DatabaseService } from './../../core/database/database.service';
-import { BadRequestException, HttpException, HttpStatus, Injectable, UnauthorizedException , Request} from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, UnauthorizedException, Request } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDto, UpdateUserDto } from './dto/auth.dto';
 import { NotExistException } from 'src/core/exception';
@@ -24,7 +24,7 @@ export class AuthService {
     const isCurrectPassword = await bcrypt.compare(authModel.password, user.password);
 
     if (isCurrectPassword) {
-      const payload = { sub: user.id, username: user.userName };
+      const payload = { sub: user.id, phoneNumber: user.phoneNumber };
       const token = await this.jwtService.signAsync(payload);
       return { ...user, access_token: token, localId: user.id };
     }
@@ -39,9 +39,9 @@ export class AuthService {
     try {
       const password = await bcrypt.hash(authModel.password, 10);
       const res = await this.databaseService.user.create({
-        data: { ...authModel, password: password, address: authModel.address ?? [] },
+        data: { ...authModel, password: password },
       });
-      const payload = { sub: res.id, username: res.userName };
+      const payload = { sub: res.id, phoneNumber: res.phoneNumber };
       const token = await this.jwtService.signAsync(payload);
       return { ...res, password: undefined, access_token: token, localId: res.id };
     }
@@ -52,8 +52,8 @@ export class AuthService {
 
   }
 
-  async updateUser(updateModel: Prisma.UserCreateInput ,@Request() req){
-    try{
+  async updateUser(updateModel: Prisma.UserCreateInput, @Request() req) {
+    try {
       const user = req.user;
       await this.databaseService.user.update({
         where: { id: user.sub },
@@ -61,29 +61,29 @@ export class AuthService {
       });
       return { msg: "ok" };
     }
-    catch(e){
+    catch (e) {
       console.log(e);
       throw new BadRequestException()
     }
   }
 
-  async getCurrentUser(@Request() req){
-    try{
+  async getCurrentUser(@Request() req) {
+    try {
       const user = req.user;
       const token = await this.jwtService.signAsync(user);
-      const data =  await this.databaseService.user.findUnique({ where: { id: user.sub } });
+      const data = await this.databaseService.user.findUnique({ where: { id: user.sub } });
       return { ...data, access_token: token };
     }
-    catch(e){
+    catch (e) {
       throw new BadRequestException()
     }
   }
 
-  async getAll(){
+  async getAll() {
     return await this.databaseService.user.findMany();
   }
 
-  async deleteAll(){
+  async deleteAll() {
     return await this.databaseService.user.deleteMany();
   }
 

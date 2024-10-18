@@ -17,8 +17,6 @@ export class OrderController {
         return this.orderService.addOrder(body, req);
     }
 
-    // @Post('complete_order/:id')
-    // completeOrder(@Param('id', ParseIntPipe) id: number , @Request() req){
     @Post('complete_order')
     completeOrder(@MessageBody() ids: { ids: number[] }, @Request() req){
         console.log(ids);

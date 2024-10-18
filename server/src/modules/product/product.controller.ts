@@ -1,35 +1,37 @@
 import { Prisma } from '@prisma/client';
-import { FoodService } from './food.service';
+import { ProductService } from './product.service';
 import { Body, Controller, Get, Param, Post, Res, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { Public } from 'src/core/guard/auth.metadata';
 
 
-@Controller('food')
-export class FoodController {
-    constructor(private readonly foodService: FoodService) { }
+@Controller('product')
+export class ProductController {
+    constructor(private readonly productService: ProductService) { }
 
+    @Public()
     @Post('/create')
     @UseInterceptors(FilesInterceptor('images', 5))
-    create(@Body() foodModel: Prisma.FoodCreateInput, @UploadedFiles() images: Array<Express.Multer.File>,) {
-        return this.foodService.create(images, foodModel);
+    create(@Body() productModel: Prisma.ProductCreateInput, @UploadedFiles() images: Array<Express.Multer.File>,) {
+        return this.productService.create(images, productModel);
     }
 
+    @Public()
     @Get('/getAll')
     getAll() {
-        return this.foodService.getAll();
+        return this.productService.getAll();
     }
 
     @Post('/clear')
     clear() {
-        return this.foodService.clear()
+        return this.productService.clear()
     }
 
     @Public()
     @Get('/download_image/:image')
     downlaodImage(@Param('image') image: string, @Res() res: Response) {
-        return this.foodService.downlaodImage(image, res);
+        return this.productService.downlaodImage(image, res);
     }
 
 }

@@ -28,7 +28,7 @@
     "@nestjs/schedule": "^4.1.0",
     "@nestjs/serve-static": "^4.0.2",
     "@nestjs/websockets": "^10.3.10",
-    "@prisma/client": "^5.21.0",
+    "@prisma/client": "^5.21.1",
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",

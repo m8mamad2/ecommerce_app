@@ -5,7 +5,6 @@
 import "@/globals.css";
 import { Button, Input } from "@nextui-org/react";
 import { useState } from "react";
-import { MdMarkEmailRead } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeLine } from "react-icons/ri";
 
@@ -72,7 +71,6 @@ export default function RegisterPage(){
             </div>
 
 
-            <div className="absolute top-0 left-0 h-32 w-32 bg-[#ccae8c] rounded-full"></div>
 
         </div>
     )

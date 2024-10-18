@@ -1,9 +1,11 @@
 import { div } from "framer-motion/client";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { Button, Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
+import ProductCard from "@/app/components/ProductCard";
 
 export default function ProductsPage(){
-
+    const data = ['./product/1.png','./product/2.png','./product/3.png','./product/4.png','./product/1.png',]
+    const dataNew = ['./product/1.png','./product/2.png','./product/3.png','./product/4.png','./product/1.png']
     return (
         <div className="mx-10 my-4">
             

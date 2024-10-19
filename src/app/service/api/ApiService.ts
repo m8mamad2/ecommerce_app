@@ -20,7 +20,7 @@ export class ApiService{
     
     static async post<T>(endPoint: string, data: object): Promise<ApiRes<T>> {
         try{
-            const res = await axios.post(endPoint, data);
+            const res = await axiosInstance.post(endPoint, data);
             return { result: true, data: res.data, statusCode: res.status };
         }
         catch(e){

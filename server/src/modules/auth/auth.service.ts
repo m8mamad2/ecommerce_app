@@ -37,6 +37,9 @@ export class AuthService {
       throw new BadRequestException();
 
     try {
+      const isAutheticated = await this.databaseService.user.findMany({ where:{ phoneNumber: authModel.phoneNumber } })
+      if(isAutheticated)
+        throw new HttpException('User Already Signed', HttpStatus.FORBIDDEN)
       const password = await bcrypt.hash(authModel.password, 10);
       const res = await this.databaseService.user.create({
         data: { phoneNumber: authModel.phoneNumber, password: password },

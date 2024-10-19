@@ -20,13 +20,13 @@ export default function LoginPage(){
         event.preventDefault();
         setIsLoading(true);
         try{
-            const formData = new FormData(event.currentTarget);
-            const phoneNumber = formData.get('phoneNumber')?.valueOf().toString()
-            const password = formData.get('password')?.valueOf().toString()
-            console.log(phoneNumber)
-            console.log(password)
-            await loignApi(phoneNumber!, password!);
-            router.push('/')
+            // const formData = event.currentTarget;
+            // const phoneNumber = formData.get
+            // const password = formData.get('password')?.valueOf().toString()
+            // console.log(phoneNumber)
+            // console.log(password)
+            await loignApi("phoneNumber"!, "password"!);
+            // router.push('/')
         }
         catch(e){
             console.log(e)
@@ -42,7 +42,8 @@ export default function LoginPage(){
             <div className=" w-[42%] flex flex-col justify-center items-start px-40 ">
                 <h1 className="text-5xl font-bold text-white">وارد اکانت خود شوید</h1>
                 <h1 className="text-lg text-gray-400 mb-10 mt-3">با داشتن ایمیل و رمزعبور وارد اکانت خودتون بشید </h1>
-                <form onSubmit={onSubmit} className="w-full">
+                <form className="w-full">
+                {/* <form onSubmit={onSubmit} className="w-full"> */}
                     <Input
                         isClearable
                         type="text"
@@ -79,7 +80,8 @@ export default function LoginPage(){
                         />
                     <Button 
                         variant="solid" 
-                        type="submit"
+                        // type="submit"
+                        onClick={async()=> await onSubmit()}
                         className="w-full mt-28 bg-[#656563] text-black font-bold">ثبت نام</Button>
                 </form>
             </div>

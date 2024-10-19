@@ -6,8 +6,9 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from 'path';
 import { JwtModule } from '@nestjs/jwt';
 import { jwsConstans } from './core/constans';
-import { OrderModule } from './modules/order/order.module';
+import { CartModule } from './modules/cart/cart.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { FavoriteModule } from './modules/favorite/favorite.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { ScheduleModule } from '@nestjs/schedule';
     JwtModule.register({ global: true, secret: jwsConstans.secret, }),
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', '/uploads'), }),
     ScheduleModule.forRoot(),
-    OrderModule,
+    CartModule,
+    FavoriteModule
   ],
   controllers: [],
   providers: [],

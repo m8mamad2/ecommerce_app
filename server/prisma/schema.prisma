@@ -15,34 +15,36 @@ model Product {
   price       Int
   lable       String
   Favorite    Favorite?
+  Cart        Cart?
 }
 
 model Favorite {
   id           Int     @id @default(autoincrement())
   userId       String  @unique
-  foodId       Int     @unique
-  favoriteFood Product @relation(fields: [foodId], references: [id])
+  productId     Int     @unique
+  favoriteProduct Product @relation(fields: [productId], references: [id])
 }
 
 model User {
   id           Int     @id @default(autoincrement())
-  email        String? @unique
   password     String
   full_name    String?
   address_name String?
-  privance     String
-  city         String
-  postal_code  String
-  plate        String
-  phoneNumber  String? @unique
+  privance     String?
+  city         String?
+  postal_code  String?
+  plate        String?
+  phoneNumber  String @unique
 }
 
-model Order {
+model JustForFun{
   id          Int      @id @default(autoincrement())
-  userId      Int?
-  title       String
-  description String
-  images      String[]
-  price       Int
-  isComplete  Boolean  @default(false)
+  title String
+}
+
+model Cart {
+  id          Int      @id @default(autoincrement())
+  userId      String @unique
+  productId   Int @unique
+  cartProduct Product @relation(fields: [productId], references: [id])
 }

@@ -1,22 +1,22 @@
 import { DatabaseService } from './../../core/database/database.service';
 import { BadRequestException, HttpException, HttpStatus, Injectable, UnauthorizedException, Request } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AuthDto, UpdateUserDto } from './dto/auth.dto';
 import { NotExistException } from 'src/core/exception';
 import * as bcrypt from 'bcrypt';
 import { Prisma } from '@prisma/client';
+import { LoginDto, SignupDto } from 'src/core/dto/auth.dto';
 
 @Injectable()
 export class AuthService {
   constructor(private jwtService: JwtService, private databaseService: DatabaseService) { }
 
-  async login(authModel: AuthDto) {
+  async login(authModel: LoginDto) {
 
-    if (!authModel.email || !authModel.password)
+    if (!authModel.phoneNumber || !authModel.password)
       throw new BadRequestException();
 
     const user = await this.databaseService.user.findUnique({
-      where: { email: authModel.email },
+      where: { phoneNumber: authModel.phoneNumber },
     });
 
     if (!user) throw new NotExistException();
@@ -32,14 +32,14 @@ export class AuthService {
 
   }
 
-  async signUp(authModel: Prisma.UserCreateInput) {
-    if (!authModel.password || !authModel.email)
+  async signUp(authModel: SignupDto) {
+    if (!authModel.password || !authModel.phoneNumber)
       throw new BadRequestException();
 
     try {
       const password = await bcrypt.hash(authModel.password, 10);
       const res = await this.databaseService.user.create({
-        data: { ...authModel, password: password },
+        data: { phoneNumber: authModel.phoneNumber, password: password },
       });
       const payload = { sub: res.id, phoneNumber: res.phoneNumber };
       const token = await this.jwtService.signAsync(payload);

@@ -2,10 +2,13 @@ import { div } from "framer-motion/client";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { Button, Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import ProductCard from "@/app/components/ProductCard";
+import { ProductType } from "@/app/types";
 
-export default function ProductsPage(){
-    const data = ['./product/1.png','./product/2.png','./product/3.png','./product/4.png','./product/1.png',]
-    const dataNew = ['./product/1.png','./product/2.png','./product/3.png','./product/4.png','./product/1.png']
+export default async function ProductsPage(){
+
+    const response = await fetch('http://localhost:3001/products/getAll');
+    const data: ProductType[] = await response.json();
+    
     return (
         <div className="mx-10 my-4">
             
@@ -26,7 +29,17 @@ export default function ProductsPage(){
                     <Button variant="ghost" className="rounded-lg hover:text-white border-1 text-black text-sm py-1 px-5">دیدن همه</Button>
                 </div>
                 <div className="gap-6 grid grid-cols-2 sm:grid-cols-4">
-                    {data.map((item, index) => <ProductCard  item={item} index={index}/>)}
+                    {data.map((item, index) => 
+                        <div key={index}>
+                            <ProductCard 
+                                description={item.description} 
+                                title={item.title} 
+                                images={item.images} 
+                                lable={item.lable} 
+                                id={item.id}
+                                price={item.price}/>
+                        </div>
+                    )}
                 </div>
             </div>
             
@@ -48,7 +61,17 @@ export default function ProductsPage(){
                     <Button variant="ghost" className="rounded-lg hover:text-white border-1 text-black text-sm py-1 px-5">دیدن همه</Button>
                 </div>
                 <div className="gap-6 grid grid-cols-2 sm:grid-cols-5">
-                    {dataNew.map((item, index) => <ProductCard  item={item} index={index}/>)}
+                    {data.map((item, index) => 
+                        <div key={index}>
+                            <ProductCard 
+                                description={item.description} 
+                                title={item.title} 
+                                images={item.images} 
+                                lable={item.lable} 
+                                id={item.id}
+                                price={item.price}/>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -56,4 +79,3 @@ export default function ProductsPage(){
         </div>
     );
 }
-

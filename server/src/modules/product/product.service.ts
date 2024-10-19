@@ -12,21 +12,22 @@ export class ProductService {
 
     async create(images: Array<Express.Multer.File>, foodModel: Prisma.ProductCreateInput): Promise<object> {
         try {
-
             images.map(async file => {
                 try {
                     const filePath = join(this.uploadDirPath, file.originalname);
                     await fs.writeFile(filePath, file.buffer);
                 }
                 catch (e) {
+                    console.log(e)
                     throw new BadRequestException()
                 }
             });
-            const imagesUrl = images.map(file => `http://localhost:3000/food/download_image/${file.originalname}`);
+            const imagesUrl = images.map(file => `http://localhost:3001/products/download_image/${file.originalname}`);
             await this.databaseService.product.create({ data: { ...foodModel, images: imagesUrl, price: +foodModel.price } })
             return { message: "ok" };
         }
         catch (e) {
+            console.log(e)
             throw new BadRequestException()
         }
     }
@@ -51,6 +52,7 @@ export class ProductService {
 
     async downlaodImage(image: string, @Res() res: Response) {
         try {
+            console.log(image)
             const file = join(this.uploadDirPath, image);
             await fs.access(file);
             const fileStream = createReadStream(file);

@@ -6,13 +6,13 @@ import { Response } from 'express';
 import { Public } from 'src/core/guard/auth.metadata';
 
 
-@Controller('product')
+@Controller('products')
 export class ProductController {
     constructor(private readonly productService: ProductService) { }
 
     @Public()
     @Post('/create')
-    @UseInterceptors(FilesInterceptor('images', 5))
+    @UseInterceptors(FilesInterceptor('images', 4))
     create(@Body() productModel: Prisma.ProductCreateInput, @UploadedFiles() images: Array<Express.Multer.File>,) {
         return this.productService.create(images, productModel);
     }
@@ -22,7 +22,7 @@ export class ProductController {
     getAll() {
         return this.productService.getAll();
     }
-
+    
     @Post('/clear')
     clear() {
         return this.productService.clear()

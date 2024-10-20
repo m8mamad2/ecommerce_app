@@ -29,8 +29,8 @@ export default function LoginPage(){
             <div className=" w-[42%] flex flex-col justify-center items-start px-40 ">
                 <h1 className="text-5xl font-bold text-white">وارد اکانت خود شوید</h1>
                 <h1 className="text-lg text-gray-400 mb-10 mt-3">با داشتن ایمیل و رمزعبور وارد اکانت خودتون بشید </h1>
-                <form 
-                    className="w-full">
+                {/* <form  */}
+                    {/* className="w-full"> */}
                 {/* <form onSubmit={onSubmit} className="w-full"> */}
                     <Input
                         isClearable
@@ -73,12 +73,12 @@ export default function LoginPage(){
                         type="submit"
                         onClick={
                             async()=>{
-                                const res = await axios.post('http://localhost:3001/login', {"phoneNumber": phoneNumber, "password": password});
+                                const res = await axios.post('http://localhost:3001/auth/login', {"phoneNumber": phoneNumber, "password": password});
                                 console.log(res)
 
                             }}
                         className="w-full mt-28 bg-[#656563] text-black font-bold">ثبت نام</Button>
-                </form>
+                {/* </form> */}
             </div>
 
 

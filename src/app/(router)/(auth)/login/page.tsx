@@ -4,37 +4,24 @@
 
 import "@/globals.css";
 import { Button, Input } from "@nextui-org/react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeLine } from "react-icons/ri";
-import { loignApi } from "../api";
+import useSWRMutation from "swr/mutation";
+
+
+
 
 export default function LoginPage(){
 
     const router = useRouter();
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [phoneNumber, setPoneNumber] = useState<undefined | string>();
+    const [password, setPassword] = useState<undefined | string>();
 
-    async function onSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        setIsLoading(true);
-        try{
-            // const formData = event.currentTarget;
-            // const phoneNumber = formData.get
-            // const password = formData.get('password')?.valueOf().toString()
-            // console.log(phoneNumber)
-            // console.log(password)
-            await loignApi("phoneNumber"!, "password"!);
-            // router.push('/')
-        }
-        catch(e){
-            console.log(e)
-        }
-        finally {
-            setIsLoading(false);
-        }
-    }
     
     return (
         <div className="relative flex flex-row h-[100vh] bg-background">
@@ -42,7 +29,8 @@ export default function LoginPage(){
             <div className=" w-[42%] flex flex-col justify-center items-start px-40 ">
                 <h1 className="text-5xl font-bold text-white">وارد اکانت خود شوید</h1>
                 <h1 className="text-lg text-gray-400 mb-10 mt-3">با داشتن ایمیل و رمزعبور وارد اکانت خودتون بشید </h1>
-                <form className="w-full">
+                <form 
+                    className="w-full">
                 {/* <form onSubmit={onSubmit} className="w-full"> */}
                     <Input
                         isClearable
@@ -54,6 +42,7 @@ export default function LoginPage(){
                         placeholder="شماره تلفن خود را وارد کنید"
                         labelPlacement="outside"
                         required
+                        onChange={(e)=> setPoneNumber(e.currentTarget.value)}
                         onClear={() => {}}
                         className="py-5"
                         />
@@ -65,6 +54,7 @@ export default function LoginPage(){
                         required
                         name="password"
                         labelPlacement="outside"
+                        onChange={(e)=> setPassword(e.currentTarget.value)}
                         placeholder="رمز عبور خود را وارد کنید"
                         type={isVisible ? "text" : "password"}
                         endContent={
@@ -80,8 +70,13 @@ export default function LoginPage(){
                         />
                     <Button 
                         variant="solid" 
-                        // type="submit"
-                        onClick={async()=> await onSubmit()}
+                        type="submit"
+                        onClick={
+                            async()=>{
+                                const res = await axios.post('http://localhost:3001/login', {"phoneNumber": phoneNumber, "password": password});
+                                console.log(res)
+
+                            }}
                         className="w-full mt-28 bg-[#656563] text-black font-bold">ثبت نام</Button>
                 </form>
             </div>

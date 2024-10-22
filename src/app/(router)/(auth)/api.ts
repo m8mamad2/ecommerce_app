@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 
 
 export async function loignApi( phoneNumber: string, password: string, router: AppRouterInstance ){
-        const res = await ApiService.post('auth/signup', { phoneNumber: phoneNumber, password: password});
+        const res = await ApiService.post('auth/login', { phoneNumber: phoneNumber, password: password});
         if(res.result){
             const data: UserType = res.data 
             await LocalDatabaseService.setData({ key: 'user', data: data })

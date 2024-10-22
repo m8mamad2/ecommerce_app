@@ -1,6 +1,7 @@
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarProps} from "@nextui-org/react";
 import { NavbarType } from "../types";
 import { simpleButtonTransitionClass } from "../utils/hover_animation";
+import NavbarAuthButtos from "./landing/NavbarAuthButton";
 
 export default async function CustomNavbar() {
 
@@ -30,14 +31,7 @@ export default async function CustomNavbar() {
           ))}
         </div>
 
-        <div className="text-gray-300 gap-3 text-sm flex flex-row justify-end ">
-          <Link href="/login">
-            <Button className="px-8 hover:bg-primary hover:text-black ">ورود</Button>
-          </Link> 
-          <Link href="/register">
-            <Button className="px-8 hover:bg-primary hover:text-black">ثبت نام</Button>
-          </Link> 
-        </div>
+        <NavbarAuthButtos />
 
       </div>
     </div>

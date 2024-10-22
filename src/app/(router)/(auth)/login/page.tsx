@@ -25,10 +25,8 @@ export default function LoginPage(){
     const [phoneNumber, setPoneNumber] = useState<string>();
     const [password, setPassword] = useState<string>();
 
-    const handleSubmit = async () => {
-        const result = await loignApi(phoneNumber!, password! );
-        console.log(result); 
-    };
+    const handleSubmit = async () => await loignApi(phoneNumber!, password!,router );
+    
 
     return (
         <div className="relative flex flex-row h-[100vh] bg-background">
@@ -74,13 +72,13 @@ export default function LoginPage(){
                         />
                     <Button 
                         variant="solid" 
-                        onClick={()=> handleSubmit()}
+                        onClick={ handleSubmit }
                         className="w-full mt-28 bg-[#656563] text-black font-bold">ثبت نام</Button>
-                {/* </form> */}
             </div>
 
 
 
         </div>
     )
+    
 }

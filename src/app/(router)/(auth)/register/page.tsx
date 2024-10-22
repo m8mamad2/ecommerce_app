@@ -1,30 +1,25 @@
-
 'use client'
 
 
 import "@/globals.css";
 import { Button, Input } from "@nextui-org/react";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeLine } from "react-icons/ri";
 import { registerApi } from "../api";
-import toast  from "react-hot-toast";
-import showCustomToast, { ToastProps } from "@/app/components/Toast";
-// import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage(){
 
+    const router = useRouter();
     const [isVisible, setIsVisible] = useState(false);
     const [isVisibleRepeat, setIsVisibleRepeat] = useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible)
-    const [isLoading, setIsLoading] = useState(false);
     const [phoneNumber, setPoneNumber] = useState<string>();
     const [password, setPassword] = useState<string>();
     const [passwordRepeat, setPasswordRepeat] = useState<string>();
 
-    const handleSubmit = async () =>
-            await registerApi(phoneNumber!, password!);
-    
+    const handleSubmit = async () => await registerApi(phoneNumber!, password!, router);
     
     return (
         <div className="relative flex flex-row h-[100vh] bg-background">
@@ -32,7 +27,6 @@ export default function RegisterPage(){
             <div className=" w-[42%] flex flex-col justify-center items-start px-40 ">
                 <h1 className="text-5xl font-bold text-white">اکانت خودتان را بسازید</h1>
                 <h1 className="text-lg text-gray-400 mb-10 mt-3">با داشتن ایمیل و رمزعبور اکانت خودتون رو بسازید </h1>
-                {/* <form onSubmit={onSubmit} className="w-full"> */}
                 <Input
                     isClearable
                     type="email"

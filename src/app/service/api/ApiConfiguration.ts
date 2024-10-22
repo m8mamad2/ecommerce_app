@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config) => {
     const token = await LocalDatabaseService.getData('token');
-    if (token) config.headers!["Authorization"] = "Bearer " + token;
+    if (token.result) config.headers!["Authorization"] = "Bearer " + token.data;
     return config;
   },
   (error) => Promise.reject({ error })

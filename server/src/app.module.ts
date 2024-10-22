@@ -9,17 +9,21 @@ import { jwsConstans } from './core/constans';
 import { CartModule } from './modules/cart/cart.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { FavoriteModule } from './modules/favorite/favorite.module';
+import { MostSellProductModule } from './modules/most-sell-product/most-sell-product.module';
+import { CommentModule } from './modules/comment/comment.module';
 
 @Module({
   imports: [
     DatabaseModule,
     AuthModule,
     ProductModule,
+    MostSellProductModule,
     JwtModule.register({ global: true, secret: jwsConstans.secret, }),
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', '/uploads'), }),
     ScheduleModule.forRoot(),
     CartModule,
-    FavoriteModule
+    CommentModule,
+    FavoriteModule,
   ],
   controllers: [],
   providers: [],

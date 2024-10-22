@@ -1,6 +1,7 @@
 import { Button } from "@nextui-org/react"
 import { MdFavoriteBorder } from "react-icons/md"
-import { ProductType } from "../types"
+import { ProductType } from "../../types"
+import AddToFavoriteButton from "./AddToFavoriteButton"
 
 
 export default function ProductCard(props: ProductType){
@@ -18,7 +19,7 @@ export default function ProductCard(props: ProductType){
             <div className="text-base text-gray-600">{props.description.substring(0,49)} ...</div>
             <div className="flex flex-row justify-between items-center px-1 mt-3">
                 <Button className="mt-4 mb-1"> اضافه کردن به سبد</Button>
-                <MdFavoriteBorder className="text-primary border w-10  h-10 p-1 rounded-md" />
+                <AddToFavoriteButton />
             </div>
         </div>
     )

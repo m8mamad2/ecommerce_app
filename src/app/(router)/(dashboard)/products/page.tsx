@@ -1,13 +1,15 @@
 import { div } from "framer-motion/client";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { Button, Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import ProductCard from "@/app/components/ProductCard";
+import ProductCard from "@/app/components/product_card/ProductCard";
 import { ProductType } from "@/app/types";
 
 export default async function ProductsPage(){
 
     const response = await fetch('http://localhost:3001/products/getAll');
     const data: ProductType[] = await response.json();
+
+    console.log(data)
     
     return (
         <div className="mx-10 my-4">

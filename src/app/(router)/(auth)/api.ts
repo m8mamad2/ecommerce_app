@@ -1,34 +1,23 @@
-
-'use server'
-
+import showCustomToast from "@/app/components/Toast";
+import axiosInstance from "@/app/service/api/ApiConfiguration";
 import { ApiService } from "@/app/service/api/ApiService";
-import { ApiRes, UserType } from "@/app/types";
-import { cookies } from "next/headers";
+import { ErrorResponse } from "@/app/types";
+import axios, { AxiosError } from "axios";
+import { useRouter } from 'next/navigation'
 
-export async function loignApi(phoneNumber: string, password: string){
-    try{
-        console.log('---------------')
-        const res:ApiRes<unknown> = await ApiService.post('auth/login', { phoneNumber: "112421321", password: "password" })
-        
-        console.log(res)
-        // const data: UserType = res.data;
-        // cookies().set('token','1234eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0Ijo' )
-    }
-    catch(e){
-        throw new Error('Error');
-    }
+
+export async function loignApi( phoneNumber: string, password: string ){
+        const res = await ApiService.post('auth/login', { phoneNumber: phoneNumber, password: password});
 }
 
-export async function signupApi(phoneNumber: string, password: string){
-    try{
-        console.log('---------------')
-        const res:ApiRes<unknown> = await ApiService.post('auth/signup', { phoneNumber: "112421321", password: "password" })
-        
-        console.log(res)
-        // const data: UserType = res.data;
-        // cookies().set('token','1234eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0Ijo' )
-    }
-    catch(e){
-        throw new Error('Error');
-    }
+export async function registerApi( phoneNumber: string, password: string ){
+        const res = await ApiService.post('auth/signup', { phoneNumber: phoneNumber, password: password});
+        if(res.result){
+            showCustomToast({ 
+                message:  'ثبت نام اکانت موفقیت آمیز بود' , 
+                status:'success' 
+            })
+            const router = useRouter();
+            router.push('/');
+        }
 }

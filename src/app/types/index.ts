@@ -31,3 +31,20 @@ export type UserType = {
     access_token: string,
     localId: number,
 }
+
+
+export type ErrorResponse = {
+    message: string[] | string,
+    statusCode: number,
+    error?: string
+}
+
+export interface ILocalDatabaseInput<T>{
+    key: string,
+    data: T 
+}
+
+export interface LocalDatabaseRes<T> {
+    result: boolean,
+    data: T,
+}

@@ -30,11 +30,13 @@ export class AuthController {
         return this.authService.getCurrentUser(req);
     }
 
+    @Public()
     @Get('all')
     async getAll(){
         return this.authService.getAll();
     }
-
+    
+    @Public()
     @Delete('all')
     async deleteAll(){
         return this.authService.deleteAll();

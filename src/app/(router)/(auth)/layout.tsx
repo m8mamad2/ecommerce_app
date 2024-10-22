@@ -1,4 +1,5 @@
 import { vazirmatnFont } from "@/app/fonts/font"
+import { Toaster } from "react-hot-toast"
 
 export const metadata = {
   title: 'Next.js',
@@ -12,7 +13,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="rtl">
-      <body className={`${vazirmatnFont.className} antialiased dark`}>{children}</body>
+      <body className={`${vazirmatnFont.className} antialiased dark`}>
+        <Toaster position="top-left" />
+        {children}
+      </body>
     </html>
   )
 }

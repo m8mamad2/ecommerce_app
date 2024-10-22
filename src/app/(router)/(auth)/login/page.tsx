@@ -4,13 +4,16 @@
 
 import "@/globals.css";
 import { Button, Input } from "@nextui-org/react";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeLine } from "react-icons/ri";
 import useSWRMutation from "swr/mutation";
-
+import { loignApi } from "../api";
+import axiosInstance from "@/app/service/api/ApiConfiguration";
+import { ErrorResponse } from "@/app/types";
+// import { useMutation } from "@tanstack/react-query";
 
 
 
@@ -19,19 +22,20 @@ export default function LoginPage(){
     const router = useRouter();
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [phoneNumber, setPoneNumber] = useState<undefined | string>();
-    const [password, setPassword] = useState<undefined | string>();
+    const [phoneNumber, setPoneNumber] = useState<string>();
+    const [password, setPassword] = useState<string>();
 
-    
+    const handleSubmit = async () => {
+        const result = await loignApi(phoneNumber!, password! );
+        console.log(result); 
+    };
+
     return (
         <div className="relative flex flex-row h-[100vh] bg-background">
             <div className="px-6 pt-40 grid-cols-3   w-[58%] rounded-l-full bg-orange-400 bg-[url('/auth/bgauth2.jpg')]"></div>
             <div className=" w-[42%] flex flex-col justify-center items-start px-40 ">
                 <h1 className="text-5xl font-bold text-white">وارد اکانت خود شوید</h1>
                 <h1 className="text-lg text-gray-400 mb-10 mt-3">با داشتن ایمیل و رمزعبور وارد اکانت خودتون بشید </h1>
-                {/* <form  */}
-                    {/* className="w-full"> */}
-                {/* <form onSubmit={onSubmit} className="w-full"> */}
                     <Input
                         isClearable
                         type="text"
@@ -70,13 +74,7 @@ export default function LoginPage(){
                         />
                     <Button 
                         variant="solid" 
-                        type="submit"
-                        onClick={
-                            async()=>{
-                                const res = await axios.post('http://localhost:3001/auth/login', {"phoneNumber": phoneNumber, "password": password});
-                                console.log(res)
-
-                            }}
+                        onClick={()=> handleSubmit()}
                         className="w-full mt-28 bg-[#656563] text-black font-bold">ثبت نام</Button>
                 {/* </form> */}
             </div>

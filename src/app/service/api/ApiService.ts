@@ -1,7 +1,8 @@
-import { ApiRes } from "@/app/types";
+import { ApiRes, ErrorResponse } from "@/app/types";
 import axios, { AxiosError } from "axios";
 import { NextResponse } from "next/server";
 import axiosInstance from "./ApiConfiguration";
+import showCustomToast from "@/app/components/Toast";
 
 
 export class ApiService{
@@ -18,14 +19,30 @@ export class ApiService{
         }
     }
     
-    static async post<T>(endPoint: string, data: object): Promise<ApiRes<T>> {
+    static async post<T>(endPoint: string, data: object): Promise<ApiRes<any>> {
         try{
             const res = await axiosInstance.post(endPoint, data);
-            return { result: true, data: res.data, statusCode: res.status };
+            if(res.status === 200 || res.status === 201)
+                return { result: true, data: res.data, statusCode: res.status };
+            else {
+                const error = res.data as ErrorResponse;
+                showCustomToast({ 
+                    message:  typeof error.message === "string" ? error.message : error.message[0] , 
+                    status:'fail' 
+                })
+                return { result: false, data: res.data, statusCode: res.status };
+            }
         }
         catch(e){
-            const error = e as AxiosError;
-            return { result: false, data: undefined as T, statusCode: error.response?.status ?? 500 };
+            const error:ErrorResponse = (e as AxiosError).response?.data as ErrorResponse
+            showCustomToast({ 
+                message:  typeof error.message === "string" ? error.message : error.message[0] , 
+                status:'fail' 
+            })
+            return { 
+                result: false, 
+                data: typeof error.message === "string" ? error.message : error.message[0] , 
+                statusCode: error.statusCode ?? 500 };
         }
     }
     

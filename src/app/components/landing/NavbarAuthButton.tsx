@@ -1,26 +1,26 @@
 'use client'
 
-import { LocalDatabaseService } from "@/app/service/api/LocalDatabaseService";
+import { LocalDatabaseService } from "@/app/service/LocalDatabaseService";
 import { Button } from "@nextui-org/react";
 import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useUserStore } from "@/app/service/state/user_store";
 
 export default function NavbarAuthButtos(){
 
-    const [isAuth, setIsAuth] = useState<boolean>()
-    const getData = async()=>{
-      const data = await LocalDatabaseService.getData('token');
-      setIsAuth(data.result)
-    }
-    useEffect(()=>{ getData() },[])
+    const getUser = useUserStore((state)=> state.getUser)
+    const isLoggin = useUserStore((state)=> state.isLoggedIn)
+    const isLoading = useUserStore((state)=> state.isLoading)
+
+    useEffect( ()=>{ getUser() }, [] )
     
     return (
       <>
-          { isAuth 
-            ?  <div className="flex flex-row  items-center text-xl  justify-end text-black ">
-                <div className="flex flex-row  items-center bg-primary rounded-lg px-4 py-1 gap-3">
-                  <CgProfile className="" size={23}/>
+          { isLoggin 
+            ?  <div className="flex flex-row  items-center  justify-end text-black ">
+                <div className="flex flex-row  items-center bg-primary rounded-lg px-5 py-2 gap-2">
+                  <CgProfile className="" size={21}/>
                   <h1 className="">پروفایل</h1>
                 </div>
               </div>

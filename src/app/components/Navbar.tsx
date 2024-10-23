@@ -2,7 +2,6 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarProp
 import { NavbarType } from "../types";
 import { simpleButtonTransitionClass } from "../utils/hover_animation";
 import { lazy, Suspense } from "react";
-// import NavbarAuthButtos from "./landing/NavbarAuthButton";
 const NavbarAuthButtos = lazy(()=> import("./landing/NavbarAuthButton"))
 
 export default async function CustomNavbar() {
@@ -32,9 +31,8 @@ export default async function CustomNavbar() {
             </button>
           ))}
         </div>
-        <Suspense fallback={<div>Loading ...</div>}>
-          <NavbarAuthButtos />
-        </Suspense>
+        
+        <NavbarAuthButtos />
 
       </div>
     </div>

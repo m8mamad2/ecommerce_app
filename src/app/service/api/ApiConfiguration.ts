@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LocalDatabaseService } from "./LocalDatabaseService";
+import { LocalDatabaseService } from "../LocalDatabaseService";
 
 
 const axiosInstance = axios.create({

@@ -1,17 +1,27 @@
+'use client'
+
+import FavoriteGrid from "@/app/components/favorite/FavoriteGrid"
 import ProductCard from "@/app/components/product_card/ProductCard"
+import { LocalDatabaseService } from "@/app/service/LocalDatabaseService"
+import { ProductType } from "@/app/types"
+import { useEffect, useState } from "react"
 
 export default function FavoritePage(){
-    const dataNew = ['./product/1.png','./product/2.png','./product/3.png','./product/4.png','./product/1.png']
-    return (
-        <div className={`my-4 mx-9 flex flex-col px-6 pt-40 rounded-lg bg-[#EBEEED] bg-[url('/grid.png')]`}>
-            <h1 className="text-black mb-10 font-bold text-3xl">محصولات مورد علاقه شما</h1>   
-            <div className="grid grid-cols-3 gap-5 mb-10">
-                {dataNew.map((item, index) => 
-                    <div key={index}>
-                        <ProductCard  item={item} index={index}/>
-                    </div>
-                )}
-            </div>
-        </div>
-    )
+
+    // const [data, setData] = useState<ProductType[]>()
+    // const [loading, setLoading] = useState<boolean>(true)
+    
+    // const getData = async()=>{
+    //     const existData: ProductType[] = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? []
+    //     setData(existData);
+        
+    //     const isAlreadyFavorite = existData.some(item => item.id === props.id);
+    //     setIsFavorite(isAlreadyFavorite);
+        
+    //     setLoading(false)
+    // }
+    // useEffect( ()=>{}, [] )
+    
+    // return <FavoriteGrid />
+    
 }

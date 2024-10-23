@@ -9,18 +9,20 @@ import { FormEvent, useState } from "react";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeLine } from "react-icons/ri";
 import { loignApi } from "../api";
+import { useUserStore } from "@/app/service/state/user_store";
 
 
 
 export default function LoginPage(){
 
     const router = useRouter();
+    const setUser = useUserStore((state)=> state.setUser)
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [phoneNumber, setPoneNumber] = useState<string>();
     const [password, setPassword] = useState<string>();
 
-    const handleSubmit = async () => await loignApi(phoneNumber!, password!,router );
+    const handleSubmit = async () => await loignApi(phoneNumber!, password!,router, setUser );
     
 
     return (

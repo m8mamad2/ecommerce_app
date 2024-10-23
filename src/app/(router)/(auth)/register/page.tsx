@@ -8,10 +8,12 @@ import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeLine } from "react-icons/ri";
 import { registerApi } from "../api";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/app/service/state/user_store";
 
 export default function RegisterPage(){
 
     const router = useRouter();
+    const setUser = useUserStore((state)=> state.setUser)
     const [isVisible, setIsVisible] = useState(false);
     const [isVisibleRepeat, setIsVisibleRepeat] = useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible)
@@ -19,7 +21,7 @@ export default function RegisterPage(){
     const [password, setPassword] = useState<string>();
     const [passwordRepeat, setPasswordRepeat] = useState<string>();
 
-    const handleSubmit = async () => await registerApi(phoneNumber!, password!, router);
+    const handleSubmit = async () => await registerApi(phoneNumber!, password!, router, setUser);
     
     return (
         <div className="relative flex flex-row h-[100vh] bg-background">

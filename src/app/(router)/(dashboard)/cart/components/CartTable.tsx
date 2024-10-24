@@ -4,7 +4,7 @@ import React, { Key, ReactNode, useEffect, useState } from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue, TableHeaderProps} from "@nextui-org/react";
 import { MdOutlineAddBox } from "react-icons/md";
 import { CiSquareRemove } from "react-icons/ci";
-import { ProductType } from "@/app/types";
+import { CartType, ProductType } from "@/app/types";
 import { ApiService } from "@/app/service/api/ApiService";
 import { cartColumns } from "@/app/utils/cart_utiles";
 
@@ -12,33 +12,33 @@ import { cartColumns } from "@/app/utils/cart_utiles";
 
 export default function CartTable() {
 
-  const [data, setData] = useState<ProductType[]>([]);
+  const [data, setData] = useState<CartType[]>([]);
   const getData = async()=>{
-    const data:ProductType[] = (await ApiService.get('cart/getAll')).data as ProductType[]
-    console.log(data)
+    const data:CartType[] = (await ApiService.get('cart/getAll')).data as CartType[]
+    setData(data)
   }
 
   useEffect(()=>{ getData() }, [])
   
-  const renderCell = React.useCallback((user: ProductType, columnKey: Key) => {
-    const cellValue = user[columnKey as keyof ProductType];
+  const renderCell = React.useCallback((user: CartType, columnKey: Key) => {
+    const cellValue = user[columnKey as keyof CartType];
 
     switch (columnKey) {
       case "product":
         return (
           <User
-            avatarProps={{ style:{width:'45px' , height:'45px'},radius: "md", src: user.images[0]}}
-            description={<h1 className="text-gray-300 text-base">{user.title}</h1>}
-            name={cellValue}
+            avatarProps={{ style:{width:'45px' , height:'45px'},radius: "md", src: user.cartProduct.images[0]}}
+            description={<h1 className="text-gray-300 text-base">{user.cartProduct.title}</h1>}
+            name={String(cellValue)}
           >
-            {user.title}
+            {user.cartProduct.title}
           </User>
         );
       case "price":
         return (
           <div className="flex flex-col">
             {/* <p className="text-bold text-sm capitalize">{cellValue}</p> */}
-            <p className="font-semibold text-base text-gray-400 capitalize ">{user.price}</p>
+            <p className="font-semibold text-base text-gray-400 capitalize ">{user.cartProduct.price}</p>
           </div>
         );
       case "total":
@@ -46,7 +46,7 @@ export default function CartTable() {
               <Chip  size="sm" variant="flat">
                 <div className="flex flex-row gap-3 py-2 px-2 items-center ">
                     <h1 className="text-gray-400 text-sm">مجموع</h1>
-                    <h1 className="text-white text-sm font-bold">222$</h1>
+                    <h1 className="text-white text-sm font-bold">{user.cartProduct.price}</h1>
                 </div>
               </Chip>
         );
@@ -60,7 +60,7 @@ export default function CartTable() {
             </Tooltip>
             <Tooltip content="تعداد خرید" className="text-white mx-4">
               <span className="text-base text-white cursor-pointer active:opacity-50">
-                {user.price}
+                {user.quanity}
               </span>
             </Tooltip>
             <Tooltip color="danger" content="حذف">
@@ -71,7 +71,7 @@ export default function CartTable() {
           </div>
         );
       default:
-        return cellValue;
+        return String(cellValue);
     }
   }, []);
 

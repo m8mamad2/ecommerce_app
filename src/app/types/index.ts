@@ -48,3 +48,12 @@ export interface LocalDatabaseRes<T> {
     result: boolean,
     data: T,
 }
+
+
+export interface CartType {
+    id: number
+    userId: number
+    productId: number
+    quanity: number
+    cartProduct: ProductType
+  }

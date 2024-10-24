@@ -39,13 +39,13 @@ export class CartService {
     async addCart(cartDto: CartDto, @Request() req){
         try{
             const userId = req.user.sub;
-            console.log(userId)
             const product = await this.databaseService.product.findUnique({ where: { id: +cartDto.productId } })
 
             if(!product) 
                 throw new HttpException('Not Exist', HttpStatus.NOT_FOUND)
+
             
-            const existingCartItem = await this.databaseService.cart.findFirst({
+            const existingCartItem = await this.databaseService.cart.findUnique({
                 where:{
                     userId: userId,
                     productId: +cartDto.productId
@@ -55,12 +55,13 @@ export class CartService {
             if(existingCartItem){
                 return await this.databaseService.cart.update({
                     where: {
-                        id: existingCartItem.id
+                        userId_productId: {
+                            userId: userId,
+                            productId: +cartDto.productId
+                        },
                     },
                     data: {
-                        quanity: {
-                            increment: 1
-                        }
+                        quanity: existingCartItem.quanity + 1
                     }
                 });
             }

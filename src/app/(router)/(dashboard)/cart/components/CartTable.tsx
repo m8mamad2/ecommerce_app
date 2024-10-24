@@ -19,6 +19,8 @@ export default function CartTable() {
   }
 
   useEffect(()=>{ getData() }, [])
+
+  const incProduct = async()=>{}
   
   const renderCell = React.useCallback((user: CartType, columnKey: Key) => {
     const cellValue = user[columnKey as keyof CartType];
@@ -54,9 +56,13 @@ export default function CartTable() {
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip color="success" content="افزایش">
-              <span className="text-lg text-success cursor-pointer active:opacity-50">
+              <button 
+                onClick={()=>{
+                  
+                }}
+                className="text-lg text-success cursor-pointer active:opacity-50">
                 <MdOutlineAddBox size={23}/>
-              </span>
+              </button>
             </Tooltip>
             <Tooltip content="تعداد خرید" className="text-white mx-4">
               <span className="text-base text-white cursor-pointer active:opacity-50">
@@ -93,6 +99,7 @@ export default function CartTable() {
         </TableBody>
       </Table>
   );
+
 }
 
 

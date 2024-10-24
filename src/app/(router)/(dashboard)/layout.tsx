@@ -5,6 +5,7 @@ import { geistMono, geistSans } from "../../utils/fonts";
 import CustomNavbar from "../../components/Navbar";
 import { vazirmatnFont } from "../../fonts/font";
 import Footer from "../../components/Footer";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <CustomNavbar />
           { children }
           <Footer />
+          <Toaster position="top-left" />
         </NextUIProvider>
       </body>
     </html> 

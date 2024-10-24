@@ -1,26 +1,37 @@
 'use client'
 
-import React, { Key, ReactNode } from "react";
+import React, { Key, ReactNode, useEffect, useState } from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue, TableHeaderProps} from "@nextui-org/react";
 import { MdOutlineAddBox } from "react-icons/md";
 import { CiSquareRemove } from "react-icons/ci";
-import { TUserTableType } from '@/app/types/cartType'
+import { ProductType } from "@/app/types";
+import { ApiService } from "@/app/service/api/ApiService";
+import { cartColumns } from "@/app/utils/cart_utiles";
 
 
 
 export default function CartTable() {
-  const renderCell = React.useCallback((user: TUserTableType, columnKey: Key) => {
-    const cellValue = user[columnKey as keyof TUserTableType];
+
+  const [data, setData] = useState<ProductType[]>([]);
+  const getData = async()=>{
+    const data:ProductType[] = (await ApiService.get('cart/getAll')).data as ProductType[]
+    console.log(data)
+  }
+
+  useEffect(()=>{ getData() }, [])
+  
+  const renderCell = React.useCallback((user: ProductType, columnKey: Key) => {
+    const cellValue = user[columnKey as keyof ProductType];
 
     switch (columnKey) {
       case "product":
         return (
           <User
-            avatarProps={{ style:{width:'45px' , height:'45px'},radius: "md", src: user.image}}
-            description={<h1 className="text-gray-300 text-base">{user.name}</h1>}
+            avatarProps={{ style:{width:'45px' , height:'45px'},radius: "md", src: user.images[0]}}
+            description={<h1 className="text-gray-300 text-base">{user.title}</h1>}
             name={cellValue}
           >
-            {user.name}
+            {user.title}
           </User>
         );
       case "price":
@@ -49,7 +60,7 @@ export default function CartTable() {
             </Tooltip>
             <Tooltip content="تعداد خرید" className="text-white mx-4">
               <span className="text-base text-white cursor-pointer active:opacity-50">
-                {user.howMuch}
+                {user.price}
               </span>
             </Tooltip>
             <Tooltip color="danger" content="حذف">
@@ -65,74 +76,23 @@ export default function CartTable() {
   }, []);
 
   return (
-  <Table aria-labelledby="Example table with custom cells" aria-label="Example table with custom cells">
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={users}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey:Key) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <Table aria-labelledby="Example table with custom cells" aria-label="Example table with custom cells">
+        <TableHeader columns={cartColumns}>
+          {(column) => (
+            <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+              {column.name}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody items={data}>
+          {(item) => (
+            <TableRow key={item.id}>
+              {(columnKey:Key) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
   );
 }
 
-const columns:{ name:string , uid:string }[]= [
-    {name: "محصول", uid: "product"},
-    {name: "مبلغ", uid: "price"},
-    {name: "جمع این محصول", uid: "total"},
-    {name: "مقدار", uid: "howmuch"},
-];
-  
-const users: TUserTableType[] = [
-    {
-        id: 1,
-        name: "پیراهن گل گلی",
-        image: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-        price:'22$',
-        howMuch:'0'
-    },
-    {
-        id: 2,
-        name: "شلوار گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-        price:'27$',
-        howMuch:'0'
-    },
-    {
-        id: 3,
-        name: "شرتک گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-        price:'27$',
-        howMuch:'8'
-    },
-    {
-        id: 4,
-        name: "شرتک گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-        price:'27$',
-        howMuch:'12'
-    },
-    {
-        id: 5,
-        name: "پیراهن گل گلی",
-        image: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-        price:'22$',
-        howMuch:'0'
-    },
-    {
-        id: 6,
-        name: "شلوار گل منگولی",
-        image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-        price:'27$',
-        howMuch:'0'
-    },
-    
-];
+

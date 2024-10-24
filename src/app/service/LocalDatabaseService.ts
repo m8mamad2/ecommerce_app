@@ -23,7 +23,6 @@ export class LocalDatabaseService{
                 return { result: false, data: data as T  };
         }
         catch(e){
-            console.log(e)
             return { result: false, data: undefined as T };
         }
     }

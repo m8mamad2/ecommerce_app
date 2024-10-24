@@ -9,11 +9,8 @@ export default async function ProductsPage(){
     const response = await fetch('http://localhost:3001/products/getAll');
     const data: ProductType[] = await response.json();
 
-    console.log(data)
-    
     return (
         <div className="mx-10 my-4">
-            
             <div className={`flex flex-col px-20 pt-44 h-[calc(100vh-20px)] items-center justify-center rounded-lg bg-[#EBEEED] bg-[url('/bglast.png')] bg-cover bg-center`}> 
                 <h1 className="text-white font-bold text-3xl">به استقبال فصل جدید بروید با لباس‌های منحصر به فرد و شیک ما!</h1>
                 <p className="text-gray-300 w-[80%] text-center mt-4">مجموعه‌ای از لباس‌های باکیفیت، مناسب هر سبک و سلیقه. از مانتوها و کاپشن‌های گرم و راحت گرفته تا پیراهن‌های رسمی و کلاسیک.لباس‌هایی با طراحی خاص و پارچه‌های طبیعی که شما را در هر لحظه درخشان می‌کنند. همین امروز استایل دلخواه خود را پیدا کنید!</p>

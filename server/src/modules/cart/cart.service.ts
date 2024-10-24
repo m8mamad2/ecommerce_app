@@ -21,15 +21,32 @@ export class CartService {
         }
     }
 
-    async addCart(cartDto: CartDto){
+    async getOne(@Request() req, id: number){
         try{
+            const userId = req.user.sub.toString();
+            return await this.databaseService.cart.findMany({
+                where:{ userId: userId, id: id },
+                include: { cartProduct: true}
+            })
+        }
+        catch(e){
+            return new BadRequestException();
+        }
+    }
+
+    async addCart(cartDto: CartDto, @Request() req){
+        try{
+            const userId = req.user.sub.toString();
             const product = await this.databaseService.product.findUnique({ where: { id: +cartDto.productId } })
+
             if(!product) 
                 throw new HttpException('Not Exist', HttpStatus.NOT_FOUND)
+            
             await this.databaseService.cart.upsert({
-                where:{ userId: cartDto.userId },
+                where:{ userId: userId  },
+                // update: { productId: +cartDto.productId },
                 update: { productId: +cartDto.productId },
-                create: { userId: cartDto.userId, productId: +cartDto.productId },
+                create: { userId: userId, productId: +cartDto.productId },
                 include :{
                     cartProduct: false
                 }

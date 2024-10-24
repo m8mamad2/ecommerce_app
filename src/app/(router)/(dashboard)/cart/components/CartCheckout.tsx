@@ -9,20 +9,17 @@ import Address from "./Address";
 import FinalPayment from "./FinalPayment";
 import Payment from "./Payment";
 
-
+type ProgressType = { step: number, title: string, icon: ReactNode, page: ReactNode }
 
 
 export default function CartCheckout(){
     
-    const [step, setStep] = useState< 1 | 2 | 3 >(2);
-    const cartCheckoutItems: { step: number, title: string, icon: ReactNode, page: ReactNode }[] = [
+    const [step, setStep] = useState< 1 | 2 | 3 >(1);
+    const cartCheckoutItems: ProgressType[] = [
         { step:1, title: "جزیات خرید ", icon: <MdPayment/> , page: <Payment setStep={setStep}/> }, 
         { step:2, title: "جزیات آدرس ", icon: <GoLocation/> , page: <Address setStep={setStep}/>}, 
         { step:3, title: "پرداخت", icon: <BsCartDash/> , page: <FinalPayment setStep={setStep}/>}, 
     ]
-    
-    const [progress, setProgress] = useState<number>(20);
-    
     const currentPage = cartCheckoutItems.find(item => item.step === step)?.page;
 
     return ( 

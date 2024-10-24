@@ -1,5 +1,6 @@
 import axios from "axios";
 import { LocalDatabaseService } from "../LocalDatabaseService";
+import { UserType } from "@/app/types";
 
 
 const axiosInstance = axios.create({
@@ -12,8 +13,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const token = await LocalDatabaseService.getData('token');
-    if (token.result) config.headers!["Authorization"] = "Bearer " + token.data;
+    const res = await LocalDatabaseService.getData('user');
+    const token = (res.data as UserType).access_token
+    if (res.result && token) config.headers!["Authorization"] = "Bearer " + token;
     return config;
   },
   (error) => Promise.reject({ error })

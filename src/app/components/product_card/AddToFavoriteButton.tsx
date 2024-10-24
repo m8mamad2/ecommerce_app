@@ -11,48 +11,17 @@ import { useFavoriteStore } from "@/app/service/state/favorite_store"
 
 export default function AddToFavoriteButton(props: ProductType){
 
-    // const [data, setData] = useState<ProductType[]>()
-    // const [loading, setLoading] = useState<boolean>()
-    // const [isFavorite, setIsFavorite] = useState<boolean>(false); 
-    // const [updated, setUpdated] = useState(false);
-
-    
-    // const getData = async()=>{
-    //     setLoading(true)
-    //     const existData: ProductType[] = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? []
-    //     setData(existData);
-        
-    //     const isAlreadyFavorite = existData.some(item => item.id === props.id);
-    //     setIsFavorite(isAlreadyFavorite);
-        
-    //     setLoading(false)
-    // }
-    
-    // const addToFavoirte = async()=>{
-    //     const existData = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? []
-    //     const newData: ProductType[] = [...existData, props]
-    //     await LocalDatabaseService.setData({ key:'favorite', data: newData })
-    //     setUpdated(true)
-    // }
-
-    // const removeFromFavorite = async () => {
-    //     const existingData: ProductType[] = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? [];
-    //     const newData = existingData.filter(item => item.id !== props.id); 
-    //     await LocalDatabaseService.setData({ key: 'favorite', data: newData });
-    //     setUpdated(true);
-    // };
-
-    const isFavorite = useFavoriteStore((state)=> state.isFavoriteProduct)
+    const isFavorite = useFavoriteStore((state) => state.isFavoriteProduct(props.id));
     const isLoading = useFavoriteStore((state)=> state.isLoading)
     const getData = useFavoriteStore((state)=> state.getFavoriteData)
     const addToFavorite = useFavoriteStore((state)=> state.addFavoriteData)
     const removeFromFavorite = useFavoriteStore((state)=> state.removeFavoriteData)
 
-
-    useEffect( ()=>{ getData(props) }, [])
+    useEffect( ()=>{ getData() }, [getData])
     
     return (
-        <button onClick={isFavorite ? ()=> removeFromFavorite(props) :()=> addToFavorite(props)}>
+        <button 
+        onClick={isFavorite ? ()=> removeFromFavorite(props.id) :()=> addToFavorite(props)}>
             { 
                 isLoading 
                     ? <Spinner size='md'/>

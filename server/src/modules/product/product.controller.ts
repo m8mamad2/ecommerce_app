@@ -34,5 +34,11 @@ export class ProductController {
         return this.productService.downlaodImage(image, res);
     }
 
+    @Public()
+    @Get('/get_one/:id')
+    getOne( @Param('id') id: number ) {
+        return this.productService.getOne(id);
+    }
+
 }
 

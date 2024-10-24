@@ -12,10 +12,15 @@ export class CartController {
     getAll(@Request() req){
         return this.orderService.getAll(req);
     }
+
+    @Get('get_one/:id')
+    getOne(@Request() req, @Param(':id') id: number){
+        return this.orderService.getOne(req, id);
+    }
     
     @Post('create')
-    addCart(@Body() cartDto: CartDto){
-        return this.orderService.addCart(cartDto);
+    addCart(@Request() req,@Body() cartDto: CartDto){
+        return this.orderService.addCart(cartDto, req);
     }
 
     @Post('complete_cart')

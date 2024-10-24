@@ -3,42 +3,45 @@ import { ProductType } from '../../types/index';
 import { LocalDatabaseService } from "../LocalDatabaseService";
 
 interface FavoriteState{
-    favoriteData?: ProductType[],
-    isLoading?: boolean,
-    isFavoriteProduct?: boolean,
-    getFavoriteData: (productType :ProductType)=> Promise<void>,
+    favoriteData: ProductType[],
+    isLoading: boolean,
+    isFavoriteProduct: (productId: number) => boolean,
+    getFavoriteData: ()=> Promise<void>,
     addFavoriteData: (productType :ProductType)=> Promise<void>,
-    removeFavoriteData: (productType :ProductType)=> Promise<void>,
+    removeFavoriteData: (productId :number)=> Promise<void>,
 }
 
-export const useFavoriteStore = create<FavoriteState>()((set) => ({
-    favoriteData: undefined,
-    isLoading : undefined,
-    isFavoriteProduct: undefined,
+export const useFavoriteStore = create<FavoriteState>()((set, get) => ({
+
+    favoriteData: [],
+    isLoading : false,
     
-    getFavoriteData: async(productType: ProductType)=>{
+    isFavoriteProduct: (productId) => {
+        const { favoriteData } = get();
+        return (favoriteData ?? []).some((product) => product.id === productId);
+    },
+    
+    getFavoriteData: async()=>{
         set(()=>({ isLoading: true }))
         const existData: ProductType[] = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? []
-        set(()=>({ favoriteData: existData }))
-        const isAlreadyFavorite = existData.some(item => item.id === productType.id);
-        set(()=>({ isFavoriteProduct: isAlreadyFavorite }))
-        set(()=>({ isLoading: false }))
+        set(()=>({  favoriteData: existData, isLoading: false }))
     },
     
     addFavoriteData: async(productType: ProductType)=>{
-        set(()=>({ isLoading: true }))
-        const existData = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? []
-        const newData: ProductType[] = [...existData, productType]
+        // const existData = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? []
+        const { favoriteData } = get();
+        const newData: ProductType[] = [...favoriteData, productType]
         await LocalDatabaseService.setData({ key:'favorite', data: newData })
-        set(()=>({ isLoading: false }))
+        set({ favoriteData: newData })
     },
     
-    removeFavoriteData: async(productType: ProductType)=>{
+    removeFavoriteData: async(productId: number)=>{
         set(()=>({ isLoading: true }))
-        const existingData: ProductType[] = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? [];
-        const newData = existingData.filter(item => item.id !== productType.id); 
+        // const existingData: ProductType[] = (await LocalDatabaseService.getData('favorite')).data as ProductType[] ?? [];
+        const { favoriteData } = get();
+        const newData = favoriteData.filter(item => item.id !== productId); 
         await LocalDatabaseService.setData({ key: 'favorite', data: newData });
-        set(()=>({ isLoading: false }))
+        set(()=>({ favoriteData: newData , isLoading: false }))
     },
     
 }))

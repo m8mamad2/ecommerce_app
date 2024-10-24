@@ -62,4 +62,17 @@ export class ProductService {
             throw new NotFoundException()
         }
     }
+
+    async getOne(id: number){
+        try {
+            console.log('------------------------')
+            console.log(id)
+            return await this.databaseService.product.findUnique({ where: { id: +id } })
+        }
+        catch (e){
+            console.log("Eroor is")
+            console.log(e)
+            throw new BadRequestException()
+        }
+    }
 }

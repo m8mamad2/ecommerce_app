@@ -1,5 +1,6 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable, Request } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { useId } from 'react';
 import { DatabaseService } from 'src/core/database/database.service';
 import { CartDto } from 'src/core/dto/cart.dto';
 
@@ -9,7 +10,7 @@ export class CartService {
 
     async getAll(@Request() req){
         try{
-            const userId = req.user.sub.toString();
+            const userId = req.user.sub;
             return await this.databaseService.cart.findMany({
                 where:{ userId: userId },
                 include: { cartProduct: true}
@@ -17,13 +18,14 @@ export class CartService {
             // return await this.databaseService.cart.findMany({ where: { userId: userId } });
         }
         catch(e){
+            console.log(e)
             return new BadRequestException();
         }
     }
 
     async getOne(@Request() req, id: number){
         try{
-            const userId = req.user.sub.toString();
+            const userId = req.user.sub;
             return await this.databaseService.cart.findMany({
                 where:{ userId: userId, id: id },
                 include: { cartProduct: true}
@@ -36,22 +38,52 @@ export class CartService {
 
     async addCart(cartDto: CartDto, @Request() req){
         try{
-            const userId = req.user.sub.toString();
+            const userId = req.user.sub;
+            console.log(userId)
             const product = await this.databaseService.product.findUnique({ where: { id: +cartDto.productId } })
 
             if(!product) 
                 throw new HttpException('Not Exist', HttpStatus.NOT_FOUND)
             
-            await this.databaseService.cart.upsert({
-                where:{ userId: userId  },
-                // update: { productId: +cartDto.productId },
-                update: { productId: +cartDto.productId },
-                create: { userId: userId, productId: +cartDto.productId },
-                include :{
-                    cartProduct: false
+            const existingCartItem = await this.databaseService.cart.findFirst({
+                where:{
+                    userId: userId,
+                    productId: +cartDto.productId
                 }
             })
-            return { message : 'ok' };
+            
+            if(existingCartItem){
+                return await this.databaseService.cart.update({
+                    where: {
+                        id: existingCartItem.id
+                    },
+                    data: {
+                        quanity: {
+                            increment: 1
+                        }
+                    }
+                });
+            }
+            else { 
+                return await this.databaseService.cart.create({
+                    data: {
+                        userId: userId,
+                        productId: +cartDto.productId,
+                        quanity: 1
+                    }
+                })
+            }
+
+            // await this.databaseService.cart.upsert({
+            //     where:{ userId: userId  },
+            //     // update: { productId: +cartDto.productId },
+            //     update: { productId: +cartDto.productId },
+            //     create: { userId: userId, productId: +cartDto.productId },
+            //     include :{
+            //         cartProduct: false
+            //     }
+            // })
+            // return { message : 'ok' };
         }
         catch(e){
             console.log(e)
@@ -61,7 +93,7 @@ export class CartService {
 
     async completeCart(@Request() req){
         try{
-            const userId = req.user.sub.toString();
+            const userId = req.user.sub;
             await this.databaseService.cart.deleteMany({ where:{ userId: userId } })
             return { message : 'ok' };
         }

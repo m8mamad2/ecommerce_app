@@ -3,7 +3,7 @@ import { IsNotEmpty } from "class-validator";
 export class FavoriteDto{
 
     @IsNotEmpty()
-    userId: string;
+    userId: number;
     
     @IsNotEmpty()
     productId: number;

@@ -15,11 +15,11 @@ model Product {
   price       Int
   lable       String
   Favorite    Favorite?
-  Cart        Cart?
+  Cart        Cart[]
 }
 
 model MostSellProduct {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
   description String
   images      String[]
@@ -28,9 +28,9 @@ model MostSellProduct {
 }
 
 model Favorite {
-  id           Int     @id @default(autoincrement())
-  userId       String  @unique
-  productId     Int     @unique
+  id              Int     @id @default(autoincrement())
+  userId          Int  @unique
+  productId       Int     @unique
   favoriteProduct Product @relation(fields: [productId], references: [id])
 }
 
@@ -43,20 +43,24 @@ model User {
   city         String?
   postal_code  String?
   plate        String?
-  phoneNumber  String @unique
+  phoneNumber  String  @unique
+  Cart         Cart[]
 }
 
-
 model Cart {
-  id          Int      @id @default(autoincrement())
-  userId      String @unique
-  productId   Int @unique
+  id          Int     @id @default(autoincrement())
+  userId      Int     
+  productId   Int     @unique
+  quanity     Int     @default(1)
+  user        User    @relation(fields: [userId], references: [id])
   cartProduct Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
 }
 
 model Comment {
-  id Int @id @default(autoincrement())
-  image String
+  id      Int    @id @default(autoincrement())
+  image   String
   comment String
-  name String
+  name    String
 }

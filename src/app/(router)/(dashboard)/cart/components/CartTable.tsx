@@ -1,25 +1,37 @@
 'use client'
 
 import React, { Key, ReactNode, useEffect, useState } from "react";
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue, TableHeaderProps} from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue, TableHeaderProps } from "@nextui-org/react";
 import { MdOutlineAddBox } from "react-icons/md";
 import { CiSquareRemove } from "react-icons/ci";
-import { CartType, ProductType } from "@/app/types";
+import { CartType, LocalDatabaseRes, ProductType, UserType } from "@/app/types";
 import { ApiService } from "@/app/service/api/ApiService";
 import { cartColumns } from "@/app/utils/cart_utiles";
+import { LocalDatabaseService } from "@/app/service/LocalDatabaseService";
 
 
 
 export default function CartTable() {
 
   const [data, setData] = useState<CartType[]>([]);
-  const getData = async()=>{
-    const data:CartType[] = (await ApiService.get('cart/getAll')).data as CartType[]
+  const [isAuth, setIsAuth] = useState<boolean>();
+
+  const getData = async () => {
+    const data: CartType[] = (await ApiService.get('cart/getAll')).data as CartType[]
     setData(data)
   }
 
-  useEffect(()=>{ getData() }, [])
-  
+  const getIsAuth = async () => {
+    const data: LocalDatabaseRes<UserType> = await LocalDatabaseService.getData('user');
+    if (data.result === true && data.data.access_token)
+      setIsAuth(true)
+    else
+      setIsAuth(false)
+  }
+
+
+  useEffect(() => { getData(); getIsAuth(); }, [])
+
   const renderCell = React.useCallback((user: CartType, columnKey: Key) => {
     const cellValue = user[columnKey as keyof CartType];
 
@@ -27,7 +39,7 @@ export default function CartTable() {
       case "product":
         return (
           <User
-            avatarProps={{ style:{width:'45px' , height:'45px'},radius: "md", src: user.cartProduct.images[0]}}
+            avatarProps={{ style: { width: '45px', height: '45px' }, radius: "md", src: user.cartProduct.images[0] }}
             description={<h1 className="text-gray-300 text-base">{user.cartProduct.title}</h1>}
             name={String(cellValue)}
           >
@@ -43,19 +55,19 @@ export default function CartTable() {
         );
       case "total":
         return (
-              <Chip  size="sm" variant="flat">
-                <div className="flex flex-row gap-3 py-2 px-2 items-center ">
-                    <h1 className="text-gray-400 text-sm">مجموع</h1>
-                    <h1 className="text-white text-sm font-bold">{user.cartProduct.price}</h1>
-                </div>
-              </Chip>
+          <Chip size="sm" variant="flat">
+            <div className="flex flex-row gap-3 py-2 px-2 items-center ">
+              <h1 className="text-gray-400 text-sm">مجموع</h1>
+              <h1 className="text-white text-sm font-bold">{user.cartProduct.price}</h1>
+            </div>
+          </Chip>
         );
       case "howmuch":
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip color="success" content="افزایش">
               <span className="text-lg text-success cursor-pointer active:opacity-50">
-                <MdOutlineAddBox size={23}/>
+                <MdOutlineAddBox size={23} />
               </span>
             </Tooltip>
             <Tooltip content="تعداد خرید" className="text-white mx-4">
@@ -76,22 +88,32 @@ export default function CartTable() {
   }, []);
 
   return (
-    <Table aria-labelledby="Example table with custom cells" aria-label="Example table with custom cells">
-        <TableHeader columns={cartColumns}>
-          {(column) => (
-            <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
-              {column.name}
-            </TableColumn>
-          )}
-        </TableHeader>
-        <TableBody items={data}>
-          {(item) => (
-            <TableRow key={item.id}>
-              {(columnKey:Key) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+    <div className="w-full">
+        <div className="w-full h-full flex justify-center items-center">
+          {
+            !isAuth
+              ? <div>هنوز احراز هویت نکردید</div>
+              : data.length === 0 || data === undefined
+                ? <h1>EMPTYYYY</h1>
+                : <Table aria-labelledby="Example table with custom cells" aria-label="Example table with custom cells">
+                  <TableHeader columns={cartColumns}>
+                    {(column) => (
+                      <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+                        {column.name}
+                      </TableColumn>
+                    )}
+                  </TableHeader>
+                  <TableBody items={data}>
+                    {(item) => (
+                      <TableRow key={item.id}>
+                        {(columnKey: Key) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+          }
+        </div>
+    </div>
   );
 }
 

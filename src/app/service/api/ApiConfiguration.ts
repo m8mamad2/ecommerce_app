@@ -14,8 +14,10 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config) => {
     const res = await LocalDatabaseService.getData('user');
-    const token = (res.data as UserType).access_token
-    if (res.result && token) config.headers!["Authorization"] = "Bearer " + token;
+    if (res.result) {
+      const token = (res.data as UserType).access_token
+      if (token) config.headers!["Authorization"] = "Bearer " + token;
+    }
     return config;
   },
   (error) => Promise.reject({ error })

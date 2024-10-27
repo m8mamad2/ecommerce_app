@@ -6,36 +6,36 @@ import { CartDto } from 'src/core/dto/cart.dto';
 
 @Controller('cart')
 export class CartController {
-    constructor(private orderService:CartService ){}
+    constructor(private orderService: CartService) { }
 
     @Get('getAll')
-    getAll(@Request() req){
+    getAll(@Request() req) {
         return this.orderService.getAll(req);
     }
 
     @Get('get_one/:id')
-    getOne(@Request() req, @Param(':id') id: number){
+    getOne(@Request() req, @Param('id') id: number) {
         return this.orderService.getOne(req, id);
     }
-    
+
     @Post('create')
-    addCart(@Request() req,@Body() cartDto: CartDto){
+    addCart(@Request() req, @Body() cartDto: CartDto) {
         return this.orderService.addCart(cartDto, req);
     }
 
     @Post('complete_cart')
-    completeCart(@Request() req){
+    completeCart(@Request() req) {
         return this.orderService.completeCart(req);
     }
 
     @Delete('/delete')
-    deleteCart(){
+    deleteCart() {
         return this.orderService.deleteCarts();
     }
 
     @Delete('/clear')
-    clear(){
+    clear() {
         return this.orderService.deleteCarts();
     }
-    
+
 }

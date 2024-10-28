@@ -1,6 +1,6 @@
 import { ApiService } from "@/app/service/api/ApiService"
 import { useCartStore } from "@/app/service/state/cart_store"
-import { ApiRes } from "@/app/types"
+import { ApiRes, StepsProps } from "@/app/types"
 import { Button } from "@nextui-org/react"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
@@ -12,7 +12,7 @@ type PaymnetApiRes = {
     pay: number,
 }
 
-export default function Payment( { setStep }:{ setStep:Dispatch<SetStateAction<1 | 2 | 3>> } ){
+export default function Payment( props: StepsProps ){
 
     const [data, setData] = useState<PaymnetApiRes>()
     const changeState = useCartStore((state)=> state.chnageState)
@@ -31,7 +31,6 @@ export default function Payment( { setStep }:{ setStep:Dispatch<SetStateAction<1
     
     return <div className="rounded-lg border-2 px-4 py-4 border-black mt-5">
         <h1 className="text-xl font-semibold">خلاصه سفارش</h1>
-        {/* <div className="bg-orange-200 w-10 h-5">{changeState}</div> */}
         <hr className="h-0.5 bg-gray-300 my-4"/>
         <div className="flex flex-col gap-3 mb-4">
             <div className="flex flex-row justify-between">
@@ -53,7 +52,7 @@ export default function Payment( { setStep }:{ setStep:Dispatch<SetStateAction<1
                 <h1 className="text-black font-medium">مبلغ قابل پرداخت</h1>
                 <h1 className="text-xl text-black font-bold">{data?.pay}</h1>
             </div>
-            <Button onClick={()=> setStep(2)} className="w-full">
+            <Button onClick={()=> props.setStep(2)} className="w-full">
                 مرحله بعد
             </Button>
         </div>

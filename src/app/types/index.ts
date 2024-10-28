@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react"
+
 export interface ApiRes<T> {
     result: boolean,
     data: T,
@@ -57,3 +59,8 @@ export interface CartType {
     quanity: number
     cartProduct: ProductType
   }
+
+
+export type StepsProps = {
+    setStep: Dispatch<SetStateAction<1 | 2 | 3>> 
+}

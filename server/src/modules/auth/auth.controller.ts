@@ -20,7 +20,7 @@ export class AuthController {
         return this.authService.signUp(authModel);
     }
 
-    @Put('/update')
+    @Post('/update')
     updateUser(@Body() updateModel: Prisma.UserCreateInput, @Request() req){
         return this.authService.updateUser(updateModel, req);
     }

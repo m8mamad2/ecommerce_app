@@ -35,27 +35,31 @@ export default function Address(props: StepsProps) {
 
   //? API
   const getCurrentUser = async () => {
-    const getCurrentUser = await ApiService.get("auth/curretn_user");
+    const getCurrentUser:ApiRes<UserType> = await ApiService.get("auth/curretn_user");
     if (getCurrentUser.result) {
-      setFormData(getCurrentUser.data);
+      setFormData({
+        address_name: getCurrentUser.data.address_name,
+        city: getCurrentUser.data.city,
+        full_name: getCurrentUser.data.full_name,
+        phoneNumber: getCurrentUser.data.phoneNumber,
+        plate: getCurrentUser.data.plate,
+        postal_code: getCurrentUser.data.postal_code,
+        privance: getCurrentUser.data.privance
+      });
     }
   };
 
   const updateData = async () => {
-    // const data =  Object.values(formData).map((e)=> {
-    //     if(e.length === 0 || !e){
-    //         showCustomToast({ 
-    //             message:  'لطفا تمام مقادیر را وارد کنید' , 
-    //             status:'fail' 
-    //         })
-    //         return false;
-    //     } 
-    // })
-    const data = Object.values(formData).every((value) => value.length === 0 || !value);
-    if(data)
-        console.log('------------- TRUE')
+    const data = Object.values(formData).every((value) => value !== "");
+    if(data){
+        const updateRes: ApiRes<{ msg: boolean }> = await ApiService.post('auth/update', formData)
+        if(updateRes.result)
+            props.setStep(3)
+        else 
+            showCustomToast({  message:  'موفقیت آمیز نبود' ,  status:'fail' })
+    }
     else 
-        console.log('------------- False')
+        showCustomToast({  message:  'لطفا تمام مقادیر را وارد کنید' ,  status:'fail' })
   };
 
   useEffect(() => {

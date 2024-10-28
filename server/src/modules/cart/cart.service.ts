@@ -6,53 +6,53 @@ import { CartDto } from 'src/core/dto/cart.dto';
 
 @Injectable()
 export class CartService {
-    constructor(private readonly databaseService: DatabaseService){}
+    constructor(private readonly databaseService: DatabaseService) { }
 
-    async getAll(@Request() req){
-        try{
+    async getAll(@Request() req) {
+        try {
             const userId = req.user.sub;
             return await this.databaseService.cart.findMany({
-                where:{ userId: userId },
-                include: { cartProduct: true}
+                where: { userId: userId },
+                include: { cartProduct: true }
             })
-            // return await this.databaseService.cart.findMany({ where: { userId: userId } });
         }
-        catch(e){
+        catch (e) {
             console.log(e)
             return new BadRequestException();
         }
     }
 
-    async getOne(@Request() req, id: number){
-        try{
+    async getOne(@Request() req, id: number) {
+        try {
             const userId = req.user.sub;
-            return await this.databaseService.cart.findMany({
-                where:{ userId: userId, id: id },
-                include: { cartProduct: true}
+            const res = await this.databaseService.cart.findMany({
+                where: { userId: userId, id: +id },
             })
+            if (res.length === 0) return { isExist: false }
+            else return { isExist: true }
         }
-        catch(e){
+        catch (e) {
             return new BadRequestException();
         }
     }
 
-    async addCart(cartDto: CartDto, @Request() req){
-        try{
+    async addCart(cartDto: CartDto, @Request() req) {
+        try {
             const userId = req.user.sub;
             const product = await this.databaseService.product.findUnique({ where: { id: +cartDto.productId } })
 
-            if(!product) 
+            if (!product)
                 throw new HttpException('Not Exist', HttpStatus.NOT_FOUND)
 
-            
+
             const existingCartItem = await this.databaseService.cart.findUnique({
-                where:{
+                where: {
                     userId: userId,
                     productId: +cartDto.productId
                 }
             })
-            
-            if(existingCartItem){
+
+            if (existingCartItem) {
                 return await this.databaseService.cart.update({
                     where: {
                         userId_productId: {
@@ -65,7 +65,7 @@ export class CartService {
                     }
                 });
             }
-            else { 
+            else {
                 return await this.databaseService.cart.create({
                     data: {
                         userId: userId,
@@ -74,51 +74,106 @@ export class CartService {
                     }
                 })
             }
-
-            // await this.databaseService.cart.upsert({
-            //     where:{ userId: userId  },
-            //     // update: { productId: +cartDto.productId },
-            //     update: { productId: +cartDto.productId },
-            //     create: { userId: userId, productId: +cartDto.productId },
-            //     include :{
-            //         cartProduct: false
-            //     }
-            // })
-            // return { message : 'ok' };
         }
-        catch(e){
+        catch (e) {
             console.log(e)
             return new BadRequestException();
         }
     }
 
-    async completeCart(@Request() req){
+    async removeFromCart(cartDto: CartDto, @Request() req) {
+        try {
+            const userId = req.user.sub;
+            const product = await this.databaseService.product.findUnique({ where: { id: +cartDto.productId } })
+
+            if (!product)
+                throw new HttpException('Not Exist', HttpStatus.NOT_FOUND)
+
+
+            const existingCartItem = await this.databaseService.cart.findUnique({
+                where: {
+                    userId: userId,
+                    productId: +cartDto.productId
+                }
+            })
+
+            if (existingCartItem.quanity > 1) {
+                return await this.databaseService.cart.update({
+                    where: {
+                        userId_productId: {
+                            userId: userId,
+                            productId: +cartDto.productId
+                        },
+                    },
+                    data: {
+                        quanity: existingCartItem.quanity - 1
+                    }
+                });
+            }
+            else {
+                return await this.databaseService.cart.delete({
+                    where: { userId: userId, productId: +cartDto.productId, }
+                })
+            }
+        }
+        catch (e) {
+            console.log(e)
+            return new BadRequestException();
+        }
+    }
+
+    async getFinalpurchases(@Request() req){
         try{
             const userId = req.user.sub;
-            await this.databaseService.cart.deleteMany({ where:{ userId: userId } })
-            return { message : 'ok' };
+            const cartItems = await this.databaseService.cart.findMany({
+                where:{ userId: userId },
+                include: { cartProduct: true } 
+            })
+
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.cartProduct.price * item.quanity), 0);
+            const discount = 10;
+            const deliverPrice = 30
+            const pay = ((subtotal - discount) - deliverPrice);
+
+            return {
+                sum: subtotal,
+                discount: discount,
+                deliverPrice: deliverPrice,
+                pay: pay
+            };
         }
         catch(e){
+            throw new BadRequestException()
+        }
+    }
+
+    async clearCart(@Request() req) {
+        try {
+            const userId = req.user.sub;
+            await this.databaseService.cart.deleteMany({ where: { userId: userId } })
+            return { message: 'ok' };
+        }
+        catch (e) {
             return new BadRequestException();
         }
     }
 
-    async deleteCarts(){
-        try{
+    async deleteCarts() {
+        try {
             await this.databaseService.cart.deleteMany();
-            return { 'msg' : 'ok' };
+            return { 'msg': 'ok' };
         }
-        catch(e){
+        catch (e) {
             return new BadRequestException();
         }
     }
 
-    async clearCart(){
-        try{
+    async clearAllCart() {
+        try {
             await this.databaseService.cart.deleteMany();
-            return { message : 'ok' };
+            return { message: 'ok' };
         }
-        catch(e){
+        catch (e) {
             return new BadRequestException();
         }
     }

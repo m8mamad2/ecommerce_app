@@ -38,6 +38,7 @@ type TInputCustomprops={
     lable: string,
     type: string
 }
+
 function InputCustom(props: TInputCustomprops){
     return (
         <Input 

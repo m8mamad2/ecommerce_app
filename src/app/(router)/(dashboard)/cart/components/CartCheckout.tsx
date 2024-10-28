@@ -16,9 +16,9 @@ export default function CartCheckout(){
     
     const [step, setStep] = useState< 1 | 2 | 3 >(1);
     const cartCheckoutItems: ProgressType[] = [
-        { step:1, title: "جزیات خرید ", icon: <MdPayment/> , page: <Payment setStep={setStep}/> }, 
-        { step:2, title: "جزیات آدرس ", icon: <GoLocation/> , page: <Address setStep={setStep}/>}, 
-        { step:3, title: "پرداخت", icon: <BsCartDash/> , page: <FinalPayment setStep={setStep}/>}, 
+        { step: 1, title: "جزیات خرید ", icon: <MdPayment/> , page: <Payment setStep={setStep}/> }, 
+        { step: 2, title: "جزیات آدرس ", icon: <GoLocation/> , page: <Address setStep={setStep}/>}, 
+        { step: 3, title: "پرداخت", icon: <BsCartDash/> , page: <FinalPayment setStep={setStep}/>}, 
     ]
     const currentPage = cartCheckoutItems.find(item => item.step === step)?.page;
 

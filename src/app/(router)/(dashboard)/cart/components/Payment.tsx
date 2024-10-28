@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/react"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
 
-type PaymnetApiRes = {
+export type PaymnetApiRes = {
     sum: number,
     discount: number,
     deliverPrice: number,

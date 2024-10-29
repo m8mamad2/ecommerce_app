@@ -15,7 +15,7 @@ export default function ProductCard(props: ProductType){
             </div>
             <div className="flex flex-row justify-between mt-6 mb-2 px-1">
                 <h1 className="text-base font-semibold">{props.title}</h1>
-                <h1 className="text-lg font-black">{props.price}$</h1>
+                <h1 className="text-xl font-black ">{props.price}$</h1>
             </div>
             <div className="text-base text-gray-600">{props.description.substring(0,49)} ...</div>
             <div className="flex flex-row justify-between items-center px-1 mt-3">

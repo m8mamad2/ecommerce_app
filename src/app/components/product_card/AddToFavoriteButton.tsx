@@ -26,8 +26,8 @@ export default function AddToFavoriteButton(props: ProductType){
                 isLoading 
                     ? <Spinner size='md'/>
                     : isFavorite 
-                        ? <MdFavorite className="text-primary border w-10 h-10 p-1 rounded-md" />
-                        :  <MdFavoriteBorder className="text-primary border w-10 h-10 p-1 rounded-md" />
+                        ? <MdFavorite className="text-primary  w-10 h-10 p-1 rounded-md" />
+                        : <MdFavoriteBorder className="text-primary  w-10 h-10 p-1 rounded-md" />
             }
         </button>
     )

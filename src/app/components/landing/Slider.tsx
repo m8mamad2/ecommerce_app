@@ -26,7 +26,7 @@ const TextSlider = () => {
                 delay: 2500,
                 disableOnInteraction: false,
             }}
-            className="flex bg-[#0C1C30] w-full rounded-full h-32 mt-8 justify-end items-end "
+            className="flex bg-background w-full rounded-full h-32 mt-8 justify-end items-end "
             modules={[Autoplay]}
             
         >

@@ -29,7 +29,7 @@ export default function Payment( props: StepsProps ){
         getData()
     },[changeState])
     
-    return <div className="rounded-lg border-2 px-4 py-4 border-black mt-5">
+    return <div className="rounded-lg border-2 px-4 py-4 border-gray-300 mt-5">
         <h1 className="text-xl font-semibold">خلاصه سفارش</h1>
         <hr className="h-0.5 bg-gray-300 my-4"/>
         <div className="flex flex-col gap-3 mb-4">
@@ -52,7 +52,7 @@ export default function Payment( props: StepsProps ){
                 <h1 className="text-black font-medium">مبلغ قابل پرداخت</h1>
                 <h1 className="text-xl text-black font-bold">{data?.pay}</h1>
             </div>
-            <Button onClick={()=> props.setStep(2)} className="w-full">
+            <Button onClick={()=> props.setStep(2)} className="w-full bg-primary text-black">
                 مرحله بعد
             </Button>
         </div>

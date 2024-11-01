@@ -9,7 +9,8 @@ import youtubeIcon from '@/app/assets/icons/youtube.png';
 import FashionImaget1 from '@/app/assets/landing/image4.png'
 import FashionImaget2 from '@/app/assets/landing/image5.png'
 import FashionImaget3 from '@/app/assets/landing/image6.png'
-import FashionImaget4 from '@/app/assets/landing/image7.png'
+// import FashionImaget4 from '@/app/assets/landing/image71.jpeg'
+import FashionImaget4 from './../../../../public/image96.jpeg'
 
 import { CiTwitter } from "react-icons/ci";
 import { CiInstagram } from "react-icons/ci";
@@ -23,11 +24,11 @@ export default function CollaborationSection() {
   const images = [FashionImaget1, FashionImaget2, FashionImaget3]
 
   return (
-    <div className={`relative flex flex-col px-32 mt-8 rounded-lg bg-[#D6E9FF] bg-[url('/grid/grid_svg1.svg')] bg-center bg-cover`}>
+    <div className={`relative flex flex-col px-32 mt-8 rounded-lg bg-primary_accent bg-[url('/grid/grid_svg1.svg')] bg-center bg-cover`}>
       <div className=" flex flex-row gap-5  w-full justify-end mt-10">
-        <CiTwitter className={`text-gray-800 border-2 p-2 w-14 h-14 border-gray-800 rounded-full ${simpleButtonTransitionClass} hover:scale-95 hover:text-primary hover:border-white`} size={40} />
-        <CiInstagram className={`text-gray-800 border-2 p-2 w-14 h-14 border-gray-800 rounded-full ${simpleButtonTransitionClass} hover:scale-95 hover:text-primary hover:border-white`} size={40} />
-        <PiTelegramLogoLight className={`text-gray-800 border-2 p-2 w-14 h-14 border-gray-800 rounded-full ${simpleButtonTransitionClass} hover:scale-95 hover:text-primary hover:border-white`} size={40} />
+        <CiTwitter className={`text-gray-800 border-2 p-2 w-14 h-14 border-gray-800 rounded-full ${simpleButtonTransitionClass} hover:scale-95 hover:text-primary   hover:border-primary`} size={40} />
+        <CiInstagram className={`text-gray-800 border-2 p-2 w-14 h-14 border-gray-800 rounded-full ${simpleButtonTransitionClass} hover:scale-95 hover:text-primary hover:border-primary`} size={40} />
+        <PiTelegramLogoLight className={`text-gray-800 border-2 p-2 w-14 h-14 border-gray-800 rounded-full ${simpleButtonTransitionClass} hover:scale-95 hover:text-primary hover:border-primary`} size={40} />
       </div>
 
       <div className="grid grid-cols-2">
@@ -43,10 +44,10 @@ export default function CollaborationSection() {
         </div>
       </div>
 
-      <div className="relative max-h-96 h-96 mb-10 mt-6">
+      <div className="relative max-h-96 h-[30rem] mb-10 mt-6 ">
 
         <Image
-          className={`w-full rounded-full mt-16 border-4 h-80 border-white bg-[url('/image7.png')]  ${simpleButtonTransitionClass} hover:scale-90 hover:shadow-lg hover:shadow-gray-400`}
+          className={`w-full rounded-full mt-16 border-4 h-[20rem] border-white bg-contain bg-[url('/image96.jpeg')] bg-center ${simpleButtonTransitionClass} hover:scale-90 hover:shadow-lg hover:shadow-gray-400`}
           src={FashionImaget4}
           alt='fashion'
         />
@@ -54,7 +55,7 @@ export default function CollaborationSection() {
         <div className="flex flex-row gap-7 absolute left-1/2 transform -translate-x-1/2 top-2">
           {images.map((e, index) =>
             <Image
-              className={`rounded-full w-28 h-28 border-4 border-white ${simpleButtonTransitionClass} hover:scale-125 hover:shadow-lg hover:shadow-gray-400`}
+              className={`rounded-full w-32 h-32 border-4 border-white ${simpleButtonTransitionClass} hover:scale-125 hover:shadow-lg hover:shadow-gray-400`}
               key={index}
               src={e}
               alt="e" />)}

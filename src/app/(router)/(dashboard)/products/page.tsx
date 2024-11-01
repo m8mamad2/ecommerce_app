@@ -6,7 +6,7 @@ import { simpleButtonTransitionClass } from "@/app/utils/hover_animation";
 
 export default async function ProductsPage(){
 
-    const response = await fetch('http://localhost:3001/products/getAll');
+    const response = await fetch('http://localhost:3001/products/getAll', { cache: 'no-store' } );
     const data: ProductType[] = await response.json();
 
     return (
@@ -43,7 +43,7 @@ export default async function ProductsPage(){
             </div>
             
 
-            <div className="grid grid-cols-2 h-96 mt-8 gap-6 bg-orange-100 py-5 px-10 rounded-lg">
+            <div className="grid grid-cols-2 h-96 mt-8 gap-6 bg-primary_accent py-5 px-10 rounded-lg">
                     <div className="rounded-xl bg-red-100 h-full bg-[url('/product/22.png')] bg-cover bg-center"></div>
                     <div className="grid grid-rows-2 gap-5">
                         <div>

@@ -46,7 +46,9 @@ export default function AddToCartButton({ id }: ProductType) {
                 isLoading
                     ? <h1>Loading</h1>
                     : isInCart
-                        ? <Button className="mt-4 mb-1 bg-primary"> حذف کردن به سبد</Button>
+                        ? <Button  
+
+                            className="mt-4 mb-1 text-red-400 hover:text-white border-red-400 hover:bg-red-300" variant="bordered"> حذف کردن به سبد</Button>
                         : <Button
                             onClick={() => addToCart()}
                             className="mt-4 mb-1"> اضافه کردن به سبد</Button>

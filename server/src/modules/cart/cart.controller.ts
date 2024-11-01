@@ -3,6 +3,7 @@ import { MessageBody } from '@nestjs/websockets';
 import { Prisma } from '@prisma/client';
 import { CartService } from './cart.service';
 import { CartDto } from 'src/core/dto/cart.dto';
+import { Public } from 'src/core/guard/auth.metadata';
 
 @Controller('cart')
 export class CartController {
@@ -13,6 +14,7 @@ export class CartController {
         return this.orderService.getAll(req);
     }
 
+    @Public()
     @Get('get_one/:id')
     getOne(@Request() req, @Param('id') id: number) {
         return this.orderService.getOne(req, id);

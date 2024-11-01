@@ -23,6 +23,7 @@ export class ProductController {
         return this.productService.getAll();
     }
     
+    @Public()
     @Post('/clear')
     clear() {
         return this.productService.clear()

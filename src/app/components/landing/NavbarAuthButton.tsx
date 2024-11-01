@@ -26,10 +26,10 @@ export default function NavbarAuthButtos(){
               </div>
             :  <div className="text-gray-300 gap-3 text-sm flex flex-row justify-end ">
                 <Link href="/login">
-                  <Button className="px-8 hover:bg-primary hover:text-black ">ورود</Button>
+                  <Button className="px-8 hover:bg-primary hover:text-black border border-primary" variant="bordered">ورود</Button>
                 </Link> 
                 <Link href="/register">
-                  <Button className="px-8 hover:bg-primary hover:text-black">ثبت نام</Button>
+                  <Button className="px-8  bg-primary hover:bg-primary/70 text-black" >ثبت نام</Button>
                 </Link> 
               </div>
           }

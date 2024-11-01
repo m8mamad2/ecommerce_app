@@ -21,7 +21,7 @@ export default function Home() {
 
       <CustomersSayingSection />
 
-      <AdsSection />
+      {/* <AdsSection /> */}
 
     </div>
   );

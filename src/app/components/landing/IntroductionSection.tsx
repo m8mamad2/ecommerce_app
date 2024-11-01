@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { CiLocationArrow1 } from "react-icons/ci";
 
-import bycicleImage from '@/app/assets/bycicleImageLanding.png'
-import manLandingImage from '@/app/assets/imageLanding.png'
+import bycicleImage from '@/app/assets/landigCircleImage2.png'
+import manLandingImage from '@/app/assets/imageLanding2.jpeg'
 import playLandingIcon from '@/app/assets/playLandingIcon.png'
 import landigCircleImage from '@/app/assets/landigCircleImage.png'
 import arrowLandigLeftImage from '@/app/assets/arrowLanding1.png'
@@ -22,7 +22,7 @@ export default function IntroductionSection(){
              
               <h1 className="text-gray-600 text-sm mt-7">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز</h1>
               <div className="flex flex-row gap-3 mt-24">
-                <button className={`px-9 py-4 rounded-full bg-black text-white hover:scale-110 hover:shadow-lg hover:shadow-gray-400 ${simpleButtonTransitionClass}`}>همین الان خرید کن</button>
+                <button className={`px-9 py-4 rounded-full bg-primary text-white hover:scale-110 hover:shadow-lg hover:shadow-gray-400 ${simpleButtonTransitionClass}`}>همین الان خرید کن</button>
                 <div className={`flex w-14 hover:text-white hover:scale-125 hover:bg-primary border-white  pr-1 justify-center hover:shadow-lg hover:shadow-gray-400 items-center bg-white rounded-full cursor-pointer ${simpleButtonTransitionClass}`}>
                   <CiLocationArrow1 size={25}/>
                 </div> 
@@ -59,7 +59,7 @@ export default function IntroductionSection(){
             </div>
             <div 
               style={{ borderTopLeftRadius: '60px' }}
-              className="flex flex-col text-center justify-start pt-16 w-72 items-center bg-gradient-to-r from-[#5DEECB] to-[#32D3AC] h-96  mr-2">
+              className="flex flex-col text-center justify-start pt-16 w-72 items-center bg-gradient-to-r from-primary to-primary h-96  mr-2">
                 <Image src={playLandingIcon} alt="playLandingIcon"/>
                 <h1 className="font-bold mt-2 ">پیشرو در تولید</h1>
                 <h1 className="font-bold">محصولات فشن</h1>
@@ -67,11 +67,11 @@ export default function IntroductionSection(){
           </div>
 
           <div className="flex flex-row mb-10 mt-48 mr-8">
-            <div className="bg-[#D9D0FF] shadow-[#bbacfa] justify-center items-center flex py-1 rounded-lg shadow-lg max-w-48 px-7">داشتن بهترین کیفیت</div>
+            <div className="bg-[#D9D0FF]  justify-center items-center flex py-1 rounded-lg shadow-lg max-w-48 px-7">داشتن بهترین کیفیت</div>
             <div className="p-3 rounded-full mx-6">
               <Image src={landigCircleImage} alt="landigCircleImage"/>
             </div>
-            <div className="bg-[#BBF6BE] shadow-[#a3eca7] justify-center items-center flex py-1 rounded-lg shadow-lg max-w-48 px-3">سفارش مستقیم از تولیدی</div>
+            <div className="bg-secondary shadow-lg  justify-center items-center flex py-1 rounded-lg max-w-48 px-3">سفارش مستقیم از تولیدی</div>
           </div>
           
           <div className="absolute  w-full flex flex-row items-end justify-center left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/3 ">
@@ -82,8 +82,9 @@ export default function IntroductionSection(){
                   <Image 
                     alt="la"
                     src={bycicleImage}
-                    height={230}
-                    width={230}/>
+                    height={280}
+                    className={`${simpleButtonTransitionClass} hover:scale-95 mb-10 mr-4`}
+                    width={280}/>
                 </div>
               </div>
             </div>

@@ -18,7 +18,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html  lang="fa" dir="rtl">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${vazirmatnFont.className} antialiased dark`}>
+        className={`${geistSans.variable} ${geistMono.variable} ${vazirmatnFont.className}  antialiased dark`}>
         <NextUIProvider>
           <CustomNavbar />
           { children }

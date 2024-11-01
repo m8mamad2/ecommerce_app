@@ -25,7 +25,7 @@ export default function CartCheckout(){
     return ( 
         <div className="w-[35%] sticky top-10 z-10 h-full">
             <div>
-                <Progress value={(step * 30)} className="rotate-180" classNames={{ indicator:'bg-background', base:'bg-white' }} />
+                <Progress value={(step * 30)} className="rotate-180" classNames={{ indicator:'bg-primary', base:'bg-balck' }} />
                 <ol className="mt-2 flex flex-row justify-between px-5 text-sm font-medium text-gray-500">
                     {
                         cartCheckoutItems.map((e,index)=> 

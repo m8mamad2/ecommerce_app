@@ -8,13 +8,13 @@ export default function CustomersSayingSection(){
     const customeresGrid = [ 1,1,1 ]
 
     return (
-        <div className={`relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-primary_accent bg-[url('/grid/grid_svg2.svg')] bg-center bg-cover`}>
+        <div className={`relative flex flex-col py-10 justify-center items-center px-32 mt-8 rounded-lg bg-secondary bg-[url('/grid/grid_svg2.svg')] bg-center bg-cover`}>
         <h1 className="text-5xl font-semibold">مشتری ها درباره ما چی میگن</h1>
         <p className="text-gray-500 text-sm my-6">تلفیقی از روند و پیچیدگی را در مجموعه سرپرستی ما کشف کنید. از لوازم ضروری شیک گرفته تا تکه‌های معمولی، مد ما فردیت را در بر می‌گیرد و تضمین می‌کند که هر کمد لباسی منعکس‌کننده سبک، تطبیق پذیری و ظرافت جاودانه است.</p>
         <div className="grid grid-cols-3 gap-12">
                {
                  customeresGrid.map((e,index)=> 
-                   <div key={index} className={`rounded-xl bg-white shadow-lg flex flex-col  py-5 px-8 ${simpleButtonTransitionClass} hover:scale-110 hover:shadow-xl`}>
+                   <div key={index} className={`rounded-xl bg-gray-100 flex flex-col  py-5 px-8 ${simpleButtonTransitionClass} hover:scale-110 hover:shadow-xl`}>
                     <div className="flex justify-between items-center">
                       <div className="flex gap-3">
                         <Image 

@@ -14,7 +14,7 @@ export class CartController {
         return this.orderService.getAll(req);
     }
 
-    @Public()
+    // @Public()
     @Get('get_one/:id')
     getOne(@Request() req, @Param('id') id: number) {
         return this.orderService.getOne(req, id);

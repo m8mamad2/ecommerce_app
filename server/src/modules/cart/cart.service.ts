@@ -11,10 +11,12 @@ export class CartService {
     async getAll(@Request() req) {
         try {
             const userId = req.user.sub;
-            return await this.databaseService.cart.findMany({
+            const res = await this.databaseService.cart.findMany({
                 where: { userId: userId },
                 include: { cartProduct: true }
             })
+            console.log(res)
+            return res;
         }
         catch (e) {
             console.log(e)
@@ -25,8 +27,11 @@ export class CartService {
     async getOne(@Request() req, id: number) {
         try {
             const userId = req.user.sub;
+            console.log(userId)
+            console.log(+id)
+            console.log('\n')
             const res = await this.databaseService.cart.findMany({
-                where: { userId: userId, id: +id },
+                where: { userId: userId, productId: +id },
             })
             if (res.length === 0) return { isExist: false }
             else return { isExist: true }

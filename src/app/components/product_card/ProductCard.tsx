@@ -3,6 +3,7 @@ import { MdFavoriteBorder } from "react-icons/md"
 import { ProductType } from "../../types"
 import AddToFavoriteButton from "./AddToFavoriteButton"
 import AddToCartButton from "./AddToCartButton"
+import { convertToPersianNumbers } from "@/app/utils/convert_persian_number"
 
 
 export default function ProductCard(props: ProductType){
@@ -15,7 +16,7 @@ export default function ProductCard(props: ProductType){
             </div>
             <div className="flex flex-row justify-between mt-6 mb-2 px-1">
                 <h1 className="text-base font-semibold">{props.title}</h1>
-                <h1 className="text-xl font-black ">{props.price}$</h1>
+                <h1 className="text-xl font-black ">{convertToPersianNumbers(props.price)} <span className="text-xs text-gray-400">تومان</span> </h1>
             </div>
             <div className="text-base text-gray-600">{props.description.substring(0,49)} ...</div>
             <div className="flex flex-row justify-between items-center px-1 mt-3">

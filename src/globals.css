@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,5 +20,10 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif, Vazirmatn;
+  font-family: Arial, Helvetica, sans-serif, Vazirmatn, 'Vazirmatn';
+}
+
+.persian-numbers {
+  font-family: var(--font-vazirmatn), sans-serif;
+  font-feature-settings: 'ss02' on; /* This may vary based on font support */
 }

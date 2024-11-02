@@ -30,15 +30,15 @@ export default function IntroductionSection(){
 
               <div className="flex flex-row gap-24 mt-20">
                 <div className="flex flex-col justify-center items-center">
-                  <h1 className="text-6xl font-extrabold">20+</h1>
+                  <h1 className="text-6xl font-extrabold">۲۰+</h1>
                   <p className="text-sm font-thin">سال سابقه کار</p>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                  <h1 className="text-6xl font-extrabold">20+</h1>
+                  <h1 className="text-6xl font-extrabold">۲۰+</h1>
                   <p className="text-sm font-thin">سال سابقه کار</p>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                  <h1 className="text-6xl font-extrabold">20+</h1>
+                  <h1 className="text-6xl font-extrabold">۲۰+</h1>
                   <p className="text-sm font-thin">سال سابقه کار</p>
                 </div>
               </div>

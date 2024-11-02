@@ -50,7 +50,11 @@ export default function AddToCartButton({ id }: ProductType) {
 
                             className="mt-4 mb-1 text-red-400 hover:text-white border-red-400 hover:bg-red-300" variant="bordered"> حذف کردن به سبد</Button>
                         : <Button
-                            onClick={() => addToCart()}
+                            // onClick={() => addToCart()}
+                            onClick={() => showCustomToast({ 
+                                message: "YO YO " , 
+                                status: 'success' 
+                            })}
                             className="mt-4 mb-1"> اضافه کردن به سبد</Button>
             }
         </div>
